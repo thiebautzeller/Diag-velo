@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0050)file:///Users/macminioctaedre/Downloads/short.html -->
+<!-- saved from url=(0052)file:///Users/macminioctaedre/Downloads/short_2.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -73,9 +73,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:15p
 .padd{border-style:dashed;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);cursor:pointer}
 .padd .ic{font-size:30px}
 #bbar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:#fff;border-top:1px solid var(--border);display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
-.ab{flex:1;display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;padding:13px 6px;-webkit-appearance:none;user-select:none;min-height:48px}
+.ab{flex:1;display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:11px;font-size:12px;font-weight:700;cursor:pointer;padding:10px 4px;-webkit-appearance:none;user-select:none;min-height:48px}
 .ab-new{background:var(--bg);color:var(--blue);border:1.5px solid var(--border)}
 .ab-save{background:var(--green);color:#fff}
+.ab-exp{background:#6B4FBB;color:#fff}
+.ab-imp{background:#8B4513;color:#fff}
 .ab-pdf{background:var(--blue2);color:#fff}
 #plist{display:none;position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
 .pl-head{background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:12px 14px;position:sticky;top:0;z-index:10}
@@ -117,7 +119,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:15p
   </div>
   <div id="prog-wrap"><div id="prog-bar"></div></div>
   <div id="prog-lbl">0 élément noté</div>
-  <div class="snav" id="snav"><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-client">👤 Client</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-velo">🚲 Vélo</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-photos">📷 Photos</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-cadre">🏗 Cadre &amp; Direction</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-frein">🛑 Freinage</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-roues">🔵 Roues &amp; Pneus</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-transm">⚙️ Transmission</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-ergo">🪑 Position &amp; Ergonomie</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-eclairage">💡 Éclairage &amp; Sécurité</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-access">🧰 Accessoires</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-vae">⚡ VAE — Électrique</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-synth">📋 Synthèse</a></div>
+  <div class="snav" id="snav"><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-client">👤 Client</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-velo">🚲 Vélo</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-photos">📷 Photos</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-cadre">🏗 Cadre &amp; Direction</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-frein">🛑 Freinage</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-roues">🔵 Roues &amp; Pneus</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-transm">⚙️ Transmission</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-ergo">🪑 Position &amp; Ergonomie</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-eclairage">💡 Éclairage &amp; Sécurité</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-access">🧰 Accessoires</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-vae">⚡ VAE — Électrique</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-synth">📋 Synthèse</a></div>
 </div>
 
 <div class="wrap">
@@ -226,9 +228,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:15p
 
 <div id="bbar">
   <button class="ab ab-new" id="btn-new">+ Nouvelle</button>
-  <button class="ab ab-save" id="btn-save">💾 Sauvegarder</button>
+  <button class="ab ab-save" id="btn-save">💾 Garder</button>
+  <button class="ab ab-exp" id="btn-exp">⬇️ Exporter</button>
+  <button class="ab ab-imp" id="btn-imp">⬆️ Importer</button>
   <button class="ab ab-pdf" id="btn-print">🖨 PDF</button>
 </div>
+<input type="file" id="import-input" accept=".json" style="display:none">
 
 <div id="plist">
   <div class="pl-head">
@@ -506,11 +511,55 @@ function bind(id,fn){
   el.addEventListener('click',fn);
 }
 bind('btn-list',openPlist);
+bind('btn-exp',exportFiche);
+bind('btn-imp',importFiche);
 bind('btn-close-list',closePlist);
 bind('btn-pdf',function(){window.print();});
 bind('btn-new',newFiche);
 bind('btn-save',saveFiche);
 bind('btn-print',function(){window.print();});
+
+
+// ── EXPORT / IMPORT FICHIERS ──
+function exportFiche(){
+  var d=collect();
+  var nom=(d.nom||'fiche').replace(/[^a-z0-9]/gi,'_').toLowerCase();
+  var date=new Date().toISOString().split('T')[0];
+  var filename='diag_velo_'+nom+'_'+date+'.json';
+  var json=JSON.stringify(d,null,2);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+  toast('⬇️ Fiche exportée : '+filename);
+}
+function importFiche(){
+  document.getElementById('import-input').click();
+}
+document.getElementById('import-input').addEventListener('change',function(e){
+  var file=e.target.files[0];if(!file)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    try{
+      var d=JSON.parse(ev.target.result);
+      if(!d.id) throw new Error('Format invalide');
+      // sauvegarder dans la liste locale aussi
+      var list=JSON.parse(localStorage.getItem('vfd')||'[]');
+      var idx=list.findIndex(function(f){return f.id===d.id;});
+      if(idx>=0)list[idx]=d;else list.unshift(d);
+      localStorage.setItem('vfd',JSON.stringify(list));
+      restore(d);
+      window.scrollTo(0,0);
+      toast('⬆️ Fiche importée : '+(d.nom||'Sans nom'));
+    }catch(err){
+      alert('Fichier invalide — ce n\'est pas une fiche de diagnostic vélo.');
+    }
+  };
+  r.readAsText(file);
+  this.value='';
+});
 
 // ── INIT ──
 document.getElementById('nbon').value=Math.floor(Math.random()*9000)+1000;
