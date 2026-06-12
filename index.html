@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)file:///Users/macminioctaedre/Downloads/index_3.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Diagnostic Vélo</title>
+<style>
+:root{
+  --blue:#1F3864;--blue2:#2E75B6;--green:#1D9E75;
+  --bg:#F2F4F8;--card:#fff;--border:#DDE3ED;--muted:#6B7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--bg);color:#1a1a1a}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;padding-top:calc(env(safe-area-inset-top,0px) + 24px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);min-height:100%}
+
+.logo{font-size:64px;margin-bottom:8px;text-align:center}
+.title{font-size:26px;font-weight:800;color:var(--blue);text-align:center;margin-bottom:6px}
+.subtitle{font-size:14px;color:var(--muted);text-align:center;margin-bottom:40px;line-height:1.5}
+
+.cards{display:flex;flex-direction:column;gap:14px;width:100%;max-width:380px}
+
+.vcard{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:20px;text-decoration:none;color:inherit;display:flex;align-items:center;gap:16px;transition:transform .1s;-webkit-appearance:none;cursor:pointer}
+.vcard:active{transform:scale(.97)}
+.vcard.short{border-color:var(--green);background:linear-gradient(135deg,#F0FBF6,#fff)}
+.vcard.long{border-color:var(--blue2);background:linear-gradient(135deg,#EEF5FC,#fff)}
+
+.vcard-ico{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.vcard.short .vcard-ico{background:#D4F2E5}
+.vcard.long .vcard-ico{background:#D6E4F0}
+
+.vcard-info{flex:1}
+.vcard-title{font-size:17px;font-weight:800;color:var(--blue);margin-bottom:4px}
+.vcard-short .vcard-title{color:var(--green)}
+.vcard-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.vcard-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(0,0,0,.06);color:var(--muted)}
+.vcard.short .tag{background:#C8EDD9;color:#1A6B45}
+.vcard.long .tag{background:#C8D9EE;color:#1A3B6B}
+
+.arrow{font-size:20px;color:var(--muted);flex-shrink:0}
+.vcard.short .arrow{color:var(--green)}
+.vcard.long .arrow{color:var(--blue2)}
+
+.footer{margin-top:36px;font-size:11px;color:var(--muted);text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="logo">🚲</div>
+<div class="title">Diagnostic Vélo</div>
+<div class="subtitle">Choisissez la version adaptée<br>à votre usage</div>
+
+<div class="cards">
+
+  <a class="vcard short" href="file:///Users/macminioctaedre/Downloads/short.html">
+    <div class="vcard-ico">⚡</div>
+    <div class="vcard-info">
+      <div class="vcard-title">Version rapide</div>
+      <div class="vcard-desc">Une seule page qui défile. Notation en 3 boutons : ✅ OK · ⚠️ Surveiller · ❌ Remplacer</div>
+      <div class="vcard-tags">
+        <span class="tag">Page unique</span>
+        <span class="tag">3 boutons</span>
+        <span class="tag">Synthèse auto</span>
+        <span class="tag">Photos</span>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="vcard long" href="file:///Users/macminioctaedre/Downloads/long.html">
+    <div class="vcard-ico">📋</div>
+    <div class="vcard-info">
+      <div class="vcard-title">Version complète</div>
+      <div class="vcard-desc">Navigation par onglets. Notation détaillée de 1 à 5 avec observations par élément.</div>
+      <div class="vcard-tags">
+        <span class="tag">5 onglets</span>
+        <span class="tag">Notation 1→5</span>
+        <span class="tag">VAE</span>
+        <span class="tag">Photos</span>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  Données sauvegardées localement sur votre appareil<br>
+  Fonctionne hors connexion après le premier chargement
+</div>
+
+
+
+</body></html>
