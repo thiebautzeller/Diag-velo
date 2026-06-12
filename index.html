@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)file:///Users/macminioctaedre/Downloads/index_4.html -->
+<!-- saved from url=(0050)file:///Users/macminioctaedre/Downloads/short.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,88 +9,515 @@
 <style>
 :root{
   --blue:#1F3864;--blue2:#2E75B6;--green:#1D9E75;
-  --bg:#F2F4F8;--card:#fff;--border:#DDE3ED;--muted:#6B7280;
+  --amber:#EF9F27;--red:#E24B4A;--orange:#C55A11;
+  --bg:#F2F4F8;--card:#fff;--border:#DDE3ED;--text:#1a1a1a;--muted:#6B7280;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}
-html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--bg);color:#1a1a1a}
-body{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;padding-top:calc(env(safe-area-inset-top,0px) + 24px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px);min-height:100%}
-
-.logo{font-size:64px;margin-bottom:8px;text-align:center}
-.title{font-size:26px;font-weight:800;color:var(--blue);text-align:center;margin-bottom:6px}
-.subtitle{font-size:14px;color:var(--muted);text-align:center;margin-bottom:40px;line-height:1.5}
-
-.cards{display:flex;flex-direction:column;gap:14px;width:100%;max-width:380px}
-
-.vcard{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:20px;text-decoration:none;color:inherit;display:flex;align-items:center;gap:16px;transition:transform .1s;-webkit-appearance:none;cursor:pointer}
-.vcard:active{transform:scale(.97)}
-.vcard.short{border-color:var(--green);background:linear-gradient(135deg,#F0FBF6,#fff)}
-.vcard.long{border-color:var(--blue2);background:linear-gradient(135deg,#EEF5FC,#fff)}
-
-.vcard-ico{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
-.vcard.short .vcard-ico{background:#D4F2E5}
-.vcard.long .vcard-ico{background:#D6E4F0}
-
-.vcard-info{flex:1}
-.vcard-title{font-size:17px;font-weight:800;color:var(--blue);margin-bottom:4px}
-.vcard-short .vcard-title{color:var(--green)}
-.vcard-desc{font-size:12px;color:var(--muted);line-height:1.5}
-.vcard-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(0,0,0,.06);color:var(--muted)}
-.vcard.short .tag{background:#C8EDD9;color:#1A6B45}
-.vcard.long .tag{background:#C8D9EE;color:#1A3B6B}
-
-.arrow{font-size:20px;color:var(--muted);flex-shrink:0}
-.vcard.short .arrow{color:var(--green)}
-.vcard.long .arrow{color:var(--blue2)}
-
-.footer{margin-top:36px;font-size:11px;color:var(--muted);text-align:center;line-height:1.6}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:15px;color:var(--text);background:var(--bg);padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+#hdr{background:var(--blue);padding:calc(env(safe-area-inset-top,0px) + 12px) 14px 0;position:sticky;top:0;z-index:100}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;padding-bottom:8px}
+.hdr-title{color:#fff;font-size:17px;font-weight:700}
+.hdr-sub{color:#BDD7EE;font-size:11px;margin-top:2px}
+.hdr-btns{display:flex;gap:8px}
+.hb{display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);border:none;color:#fff;padding:9px 13px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;min-width:44px;min-height:44px;-webkit-appearance:none;user-select:none}
+.hb.bl{background:var(--blue2)}
+#prog-wrap{background:rgba(255,255,255,.15);height:4px;border-radius:2px;overflow:hidden}
+#prog-bar{height:100%;background:#fff;width:0%;transition:width .3s;border-radius:2px}
+#prog-lbl{color:rgba(255,255,255,.7);font-size:11px;margin-top:3px;text-align:right;padding-bottom:6px}
+.snav{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 0 8px}
+.snav::-webkit-scrollbar{display:none}
+.snav a{flex-shrink:0;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;text-decoration:none;white-space:nowrap;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+.wrap{padding:12px}
+.card{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px}
+.ch{background:var(--blue);color:#fff;padding:10px 14px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.cb{padding:12px 14px}
+.f{margin-bottom:10px}
+.f label{display:block;font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.f input,.f select,.f textarea{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:11px 13px;font-size:15px;font-family:inherit;color:var(--text);background:#fff;-webkit-appearance:none;appearance:none}
+.f select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.f textarea{resize:none;min-height:64px;line-height:1.5}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--blue2)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.dsec{background:var(--blue2);color:#fff;padding:9px 14px;font-size:13px;font-weight:700;border-radius:10px;margin:14px 0 8px}
+.di{background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;margin-bottom:8px;transition:border-color .15s,background .15s}
+.di.ok{border-color:var(--green);background:#F0FBF6}
+.di.warn{border-color:var(--amber);background:#FEFBF0}
+.di.bad{border-color:var(--red);background:#FEF2F2}
+.di-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:9px;line-height:1.4}
+.btns3{display:flex;gap:6px}
+.b3{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:4px;height:46px;border:1.5px solid var(--border);border-radius:9px;background:var(--bg);font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;-webkit-appearance:none;user-select:none;min-width:44px}
+.b3.ok-sel{background:#E1F5EE;border-color:var(--green);color:var(--green)}
+.b3.warn-sel{background:#FFF8E6;border-color:var(--amber);color:#8A5C00}
+.b3.bad-sel{background:#FEE8E8;border-color:var(--red);color:var(--red)}
+.obs-in{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;font-size:13px;font-family:inherit;color:var(--text);background:var(--bg);margin-top:8px;-webkit-appearance:none;display:block}
+.obs-in:focus{outline:none;border-color:var(--blue2)}
+.score-wrap{border-radius:14px;padding:16px 14px;text-align:center;margin-bottom:14px;color:#fff;background:var(--blue2)}
+.score-big{font-size:22px;font-weight:800;margin-bottom:4px}
+.score-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700}
+.syb{border-left:4px solid var(--border);padding-left:12px;margin-bottom:12px}
+.syb.u{border-color:var(--red)}.syb.r{border-color:var(--blue2)}.syb.w{border-color:var(--amber)}
+.syl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.syb.u .syl{color:var(--red)}.syb.r .syl{color:var(--blue2)}.syb.w .syl{color:var(--amber)}
+.sitems{font-size:13px;color:var(--text);line-height:1.8}
+.dbox{background:#FFF4EE;border:2px solid var(--orange);border-radius:14px;padding:13px 14px;margin-bottom:14px}
+.dtog{display:flex;align-items:flex-start;gap:10px}
+.dtog input{width:24px;height:24px;accent-color:var(--orange);flex-shrink:0;margin-top:2px}
+.dtog span{font-size:14px;font-weight:700;color:var(--orange);line-height:1.3}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pc{aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative}
+.pc img{width:100%;height:100%;object-fit:cover}
+.pdel{position:absolute;top:5px;right:5px;width:28px;height:28px;background:rgba(0,0,0,.65);color:#fff;border:none;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-appearance:none}
+.padd{border-style:dashed;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);cursor:pointer}
+.padd .ic{font-size:30px}
+#bbar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:#fff;border-top:1px solid var(--border);display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+.ab{flex:1;display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;padding:13px 6px;-webkit-appearance:none;user-select:none;min-height:48px}
+.ab-new{background:var(--bg);color:var(--blue);border:1.5px solid var(--border)}
+.ab-save{background:var(--green);color:#fff}
+.ab-pdf{background:var(--blue2);color:#fff}
+#plist{display:none;position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
+.pl-head{background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:12px 14px;position:sticky;top:0;z-index:10}
+.pl-title{color:#fff;font-size:16px;font-weight:700}
+.pl-inner{padding:12px}
+.plc{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.plico{width:44px;height:44px;border-radius:10px;background:var(--blue2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.plinf{flex:1;min-width:0}
+.plnom{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plmeta{font-size:12px;color:var(--muted);margin-top:2px}
+.pl-btns{display:flex;gap:6px;flex-shrink:0}
+.plb{display:inline-flex;align-items:center;justify-content:center;border:none;padding:10px 14px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;-webkit-appearance:none;user-select:none;min-height:44px;min-width:44px}
+.plb-open{background:var(--blue2);color:#fff}
+.plb-del{background:#FEE8E8;color:var(--red)}
+.empty{text-align:center;padding:60px 20px;color:var(--muted);font-size:14px}
+.empty .ico{font-size:52px;margin-bottom:12px}
+#toast{position:fixed;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(16px);background:#111;color:#fff;padding:10px 22px;border-radius:22px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:999;pointer-events:none;white-space:nowrap}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+@media print{
+  #hdr,#bbar,#plist,#toast,.pdel,.padd,#pinput{display:none!important}
+  body{padding-bottom:0;background:#fff}
+  .di,.card{break-inside:avoid}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 </style>
 </head>
 <body>
 
-<div class="logo">🚲</div>
-<div class="title">Diagnostic Vélo</div>
-<div class="subtitle">Choisissez la version adaptée<br>à votre usage</div>
+<div id="hdr">
+  <div class="hdr-row">
+    <div>
+      <div class="hdr-title">🚲 Diagnostic Vélo</div>
+      <div class="hdr-sub" id="nsub">Nouvelle fiche</div>
+    </div>
+    <div class="hdr-btns">
+      <button class="hb" id="btn-list">📋 Fiches</button>
+      <button class="hb bl" id="btn-pdf">🖨 PDF</button>
+    </div>
+  </div>
+  <div id="prog-wrap"><div id="prog-bar"></div></div>
+  <div id="prog-lbl">0 élément noté</div>
+  <div class="snav" id="snav"><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-client">👤 Client</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-velo">🚲 Vélo</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-photos">📷 Photos</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-cadre">🏗 Cadre &amp; Direction</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-frein">🛑 Freinage</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-roues">🔵 Roues &amp; Pneus</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-transm">⚙️ Transmission</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-ergo">🪑 Position &amp; Ergonomie</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-eclairage">💡 Éclairage &amp; Sécurité</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-access">🧰 Accessoires</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-vae">⚡ VAE — Électrique</a><a href="file:///Users/macminioctaedre/Downloads/short.html#sec-synth">📋 Synthèse</a></div>
+</div>
 
-<div class="cards">
+<div class="wrap">
 
-  <a class="vcard short" href="https://thiebautzeller.github.io/Diag-velo/short.html">
-    <div class="vcard-ico">⚡</div>
-    <div class="vcard-info">
-      <div class="vcard-title">Version rapide</div>
-      <div class="vcard-desc">Une seule page qui défile. Notation en 3 boutons : ✅ OK · ⚠️ Surveiller · ❌ Remplacer</div>
-      <div class="vcard-tags">
-        <span class="tag">Page unique</span>
-        <span class="tag">3 boutons</span>
-        <span class="tag">Synthèse auto</span>
-        <span class="tag">Photos</span>
+<div class="score-wrap" id="score-wrap">
+  <div class="score-big" id="score-big">Aucun élément noté</div>
+  <div class="score-chips" id="score-chips"></div>
+</div>
+
+<div class="card" id="sec-client">
+  <div class="ch">👤 Client &amp; bon de dépôt</div>
+  <div class="cb">
+    <div class="f"><label>Nom &amp; Prénom</label><input type="text" id="nom" placeholder="Jean Dupont"></div>
+    <div class="r2">
+      <div class="f"><label>Téléphone</label><input type="tel" id="tel" placeholder="06 …"></div>
+      <div class="f"><label>N° bon</label><input type="text" id="nbon"></div>
+    </div>
+    <div class="r2">
+      <div class="f"><label>Date réception</label><input type="date" id="d_recep"></div>
+      <div class="f"><label>Technicien</label><input type="text" id="technicien"></div>
+    </div>
+    <div class="f"><label>Demande du client</label><textarea id="demande" placeholder="Décrire la demande…"></textarea></div>
+  </div>
+</div>
+
+<div class="card" id="sec-velo">
+  <div class="ch">🚲 Identification du vélo</div>
+  <div class="cb">
+    <div class="r2">
+      <div class="f"><label>Marque</label><input type="text" id="marque" placeholder="Trek"></div>
+      <div class="f"><label>Modèle</label><input type="text" id="modele"></div>
+    </div>
+    <div class="r3">
+      <div class="f"><label>Couleur</label><input type="text" id="couleur"></div>
+      <div class="f"><label>Type</label>
+        <select id="type_velo"><option value="">—</option><option>Ville</option><option>VTT</option><option>Route</option><option>Cargo</option><option>Enfant</option><option>Autre</option></select>
+      </div>
+      <div class="f"><label>VAE</label>
+        <select id="vae"><option value="Non">Non</option><option value="Oui">Oui</option></select>
       </div>
     </div>
-    <div class="arrow">›</div>
-  </a>
+    <div class="r2">
+      <div class="f"><label>N° cadre</label><input type="text" id="ncadre"></div>
+      <div class="f"><label>N° Bicycode</label><input type="text" id="bicycode"></div>
+    </div>
+    <div class="f"><label>Historique / incidents</label><textarea id="historique" placeholder="Dernière révision, chutes…"></textarea></div>
+  </div>
+</div>
 
-  <a class="vcard long" href="https://thiebautzeller.github.io/Diag-velo/long.html">
-    <div class="vcard-ico">📋</div>
-    <div class="vcard-info">
-      <div class="vcard-title">Version complète</div>
-      <div class="vcard-desc">Navigation par onglets. Notation détaillée de 1 à 5 avec observations par élément.</div>
-      <div class="vcard-tags">
-        <span class="tag">5 onglets</span>
-        <span class="tag">Notation 1→5</span>
-        <span class="tag">VAE</span>
-        <span class="tag">Photos</span>
+<div class="card" id="sec-photos">
+  <div class="ch">📷 Photos du vélo</div>
+  <div class="cb">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:10px">Appuyez sur + pour prendre une photo ou choisir depuis l'album.</p>
+    <div class="pgrid" id="pgrid"><div class="pc padd" data-addphoto="1"><span class="ic">📷</span><span style="font-size:12px">Ajouter</span></div></div>
+    <input type="file" id="pinput" accept="image/*" multiple="" style="display:none">
+  </div>
+</div>
+
+<div id="diag-wrap"><div class="dsec" id="sec-cadre">🏗 Cadre &amp; Direction</div><div class="di" data-di="0"><div class="di-label">Cadre (rouille, fissures, chocs)</div><div class="btns3"><button class="b3" data-i="0" data-v="1">✅ OK</button><button class="b3" data-i="0" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="0" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="0" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="1"><div class="di-label">Fourche avant (jeu, alignement)</div><div class="btns3"><button class="b3" data-i="1" data-v="1">✅ OK</button><button class="b3" data-i="1" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="1" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="1" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="2"><div class="di-label">Direction / pivot (roulements)</div><div class="btns3"><button class="b3" data-i="2" data-v="1">✅ OK</button><button class="b3" data-i="2" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="2" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="2" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="3"><div class="di-label">Potence (serrage, alignement)</div><div class="btns3"><button class="b3" data-i="3" data-v="1">✅ OK</button><button class="b3" data-i="3" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="3" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="3" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-frein">🛑 Freinage</div><div class="di" data-di="4"><div class="di-label">Levier frein avant</div><div class="btns3"><button class="b3" data-i="4" data-v="1">✅ OK</button><button class="b3" data-i="4" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="4" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="4" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="5"><div class="di-label">Levier frein arrière</div><div class="btns3"><button class="b3" data-i="5" data-v="1">✅ OK</button><button class="b3" data-i="5" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="5" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="5" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="6"><div class="di-label">Patins / plaquettes avant</div><div class="btns3"><button class="b3" data-i="6" data-v="1">✅ OK</button><button class="b3" data-i="6" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="6" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="6" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="7"><div class="di-label">Patins / plaquettes arrière</div><div class="btns3"><button class="b3" data-i="7" data-v="1">✅ OK</button><button class="b3" data-i="7" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="7" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="7" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="8"><div class="di-label">Câbles et gaines</div><div class="btns3"><button class="b3" data-i="8" data-v="1">✅ OK</button><button class="b3" data-i="8" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="8" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="8" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="9"><div class="di-label">Efficacité freinage AV</div><div class="btns3"><button class="b3" data-i="9" data-v="1">✅ OK</button><button class="b3" data-i="9" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="9" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="9" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="10"><div class="di-label">Efficacité freinage AR</div><div class="btns3"><button class="b3" data-i="10" data-v="1">✅ OK</button><button class="b3" data-i="10" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="10" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="10" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-roues">🔵 Roues &amp; Pneus</div><div class="di" data-di="11"><div class="di-label">Pneu avant — Pression : ___ bar</div><div class="btns3"><button class="b3" data-i="11" data-v="1">✅ OK</button><button class="b3" data-i="11" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="11" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="11" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="12"><div class="di-label">Pneu arrière — Pression : ___ bar</div><div class="btns3"><button class="b3" data-i="12" data-v="1">✅ OK</button><button class="b3" data-i="12" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="12" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="12" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="13"><div class="di-label">Jante avant (voilage)</div><div class="btns3"><button class="b3" data-i="13" data-v="1">✅ OK</button><button class="b3" data-i="13" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="13" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="13" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="14"><div class="di-label">Jante arrière (voilage)</div><div class="btns3"><button class="b3" data-i="14" data-v="1">✅ OK</button><button class="b3" data-i="14" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="14" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="14" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="15"><div class="di-label">Rayons AV &amp; AR</div><div class="btns3"><button class="b3" data-i="15" data-v="1">✅ OK</button><button class="b3" data-i="15" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="15" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="15" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="16"><div class="di-label">Roulements de roues</div><div class="btns3"><button class="b3" data-i="16" data-v="1">✅ OK</button><button class="b3" data-i="16" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="16" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="16" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-transm">⚙️ Transmission</div><div class="di" data-di="17"><div class="di-label">Chaîne (usure, rouille)</div><div class="btns3"><button class="b3" data-i="17" data-v="1">✅ OK</button><button class="b3" data-i="17" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="17" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="17" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="18"><div class="di-label">Pédalier / manivelles</div><div class="btns3"><button class="b3" data-i="18" data-v="1">✅ OK</button><button class="b3" data-i="18" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="18" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="18" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="19"><div class="di-label">Pédales</div><div class="btns3"><button class="b3" data-i="19" data-v="1">✅ OK</button><button class="b3" data-i="19" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="19" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="19" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="20"><div class="di-label">Plateau(x) et cassette</div><div class="btns3"><button class="b3" data-i="20" data-v="1">✅ OK</button><button class="b3" data-i="20" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="20" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="20" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="21"><div class="di-label">Dérailleur avant</div><div class="btns3"><button class="b3" data-i="21" data-v="1">✅ OK</button><button class="b3" data-i="21" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="21" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="21" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="22"><div class="di-label">Dérailleur arrière</div><div class="btns3"><button class="b3" data-i="22" data-v="1">✅ OK</button><button class="b3" data-i="22" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="22" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="22" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="23"><div class="di-label">Passage des vitesses</div><div class="btns3"><button class="b3" data-i="23" data-v="1">✅ OK</button><button class="b3" data-i="23" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="23" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="23" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-ergo">🪑 Position &amp; Ergonomie</div><div class="di" data-di="24"><div class="di-label">Selle (état, fixation) — H: ___ cm</div><div class="btns3"><button class="b3" data-i="24" data-v="1">✅ OK</button><button class="b3" data-i="24" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="24" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="24" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="25"><div class="di-label">Tige de selle (serrage)</div><div class="btns3"><button class="b3" data-i="25" data-v="1">✅ OK</button><button class="b3" data-i="25" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="25" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="25" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="26"><div class="di-label">Guidon / grips</div><div class="btns3"><button class="b3" data-i="26" data-v="1">✅ OK</button><button class="b3" data-i="26" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="26" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="26" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="27"><div class="di-label">Hauteur guidon : ___ cm</div><div class="btns3"><button class="b3" data-i="27" data-v="1">✅ OK</button><button class="b3" data-i="27" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="27" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="27" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-eclairage">💡 Éclairage &amp; Sécurité</div><div class="di" data-di="28"><div class="di-label">Phare avant (blanc)</div><div class="btns3"><button class="b3" data-i="28" data-v="1">✅ OK</button><button class="b3" data-i="28" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="28" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="28" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="29"><div class="di-label">Feu arrière (rouge)</div><div class="btns3"><button class="b3" data-i="29" data-v="1">✅ OK</button><button class="b3" data-i="29" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="29" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="29" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="30"><div class="di-label">Catadioptres</div><div class="btns3"><button class="b3" data-i="30" data-v="1">✅ OK</button><button class="b3" data-i="30" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="30" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="30" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="31"><div class="di-label">Sonnette</div><div class="btns3"><button class="b3" data-i="31" data-v="1">✅ OK</button><button class="b3" data-i="31" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="31" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="31" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="32"><div class="di-label">Réflecteurs pédales</div><div class="btns3"><button class="b3" data-i="32" data-v="1">✅ OK</button><button class="b3" data-i="32" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="32" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="32" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-access">🧰 Accessoires</div><div class="di" data-di="33"><div class="di-label">Garde-boue AV &amp; AR</div><div class="btns3"><button class="b3" data-i="33" data-v="1">✅ OK</button><button class="b3" data-i="33" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="33" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="33" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="34"><div class="di-label">Béquille</div><div class="btns3"><button class="b3" data-i="34" data-v="1">✅ OK</button><button class="b3" data-i="34" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="34" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="34" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="35"><div class="di-label">Porte-bagages</div><div class="btns3"><button class="b3" data-i="35" data-v="1">✅ OK</button><button class="b3" data-i="35" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="35" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="35" type="text" placeholder="Observations…" value=""></div><div class="dsec" id="sec-vae">⚡ VAE — Électrique</div><div class="di" data-di="36"><div class="di-label">Batterie (état, charge ___%)</div><div class="btns3"><button class="b3" data-i="36" data-v="1">✅ OK</button><button class="b3" data-i="36" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="36" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="36" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="37"><div class="di-label">Chargeur</div><div class="btns3"><button class="b3" data-i="37" data-v="1">✅ OK</button><button class="b3" data-i="37" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="37" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="37" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="38"><div class="di-label">Moteur (bruit, fixation)</div><div class="btns3"><button class="b3" data-i="38" data-v="1">✅ OK</button><button class="b3" data-i="38" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="38" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="38" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="39"><div class="di-label">Console / écran</div><div class="btns3"><button class="b3" data-i="39" data-v="1">✅ OK</button><button class="b3" data-i="39" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="39" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="39" type="text" placeholder="Observations…" value=""></div><div class="di" data-di="40"><div class="di-label">Câblage électrique</div><div class="btns3"><button class="b3" data-i="40" data-v="1">✅ OK</button><button class="b3" data-i="40" data-v="2">⚠️ Surveiller</button><button class="b3" data-i="40" data-v="3">❌ Remplacer</button></div><input class="obs-in" data-oi="40" type="text" placeholder="Observations…" value=""></div></div>
+
+<div class="card" id="sec-synth">
+  <div class="ch">📋 Synthèse &amp; préconisations</div>
+  <div class="cb">
+    <div id="synth-auto"></div>
+    <div class="syb r" style="margin-top:10px">
+      <div class="syl">💬 Remarques complémentaires</div>
+      <textarea class="obs-in" id="remarques" placeholder="Observations libres…" style="margin-top:4px"></textarea>
+    </div>
+    <div class="r2" style="margin-top:10px">
+      <div class="f"><label>Estimation coût (€)</label><input type="number" id="cout" placeholder="0" min="0"></div>
+      <div class="f"><label>Devis</label><select id="devis"><option>À établir</option><option>Joint</option></select></div>
+    </div>
+  </div>
+</div>
+
+<div class="dbox">
+  <div class="dtog">
+    <input type="checkbox" id="dcheck">
+    <span>⚠️ VÉLO DANGEREUX — NE PAS REMETTRE EN CIRCULATION</span>
+  </div>
+  <div class="f" style="margin-top:10px;margin-bottom:0">
+    <label style="color:var(--orange)">Motif</label>
+    <textarea class="obs-in" id="dmotif" placeholder="Décrire le danger…" style="width:100%;border-color:var(--orange)"></textarea>
+  </div>
+  <div style="font-size:12px;color:var(--orange);margin-top:8px">Signature technicien : ________________________ &nbsp; Date : __________</div>
+</div>
+
+<div class="card">
+  <div class="ch">✍️ Signatures</div>
+  <div class="cb">
+    <div class="r2">
+      <div style="border:1.5px solid var(--border);border-radius:9px;padding:10px;min-height:80px">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:4px">Client</div>
+        <div style="font-size:11px;color:var(--muted)">Je reconnais avoir pris connaissance du diagnostic et autorise les travaux préconisés.</div>
+      </div>
+      <div style="border:1.5px solid var(--border);border-radius:9px;padding:10px;min-height:80px">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:4px">Technicien</div>
+        <div style="font-size:11px;color:var(--muted)">Je certifie avoir réalisé ce diagnostic objectivement.</div>
       </div>
     </div>
-    <div class="arrow">›</div>
-  </a>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px">Ce document vaut bon de dépôt. Tout devis sera validé avant intervention.</p>
+  </div>
+</div>
 
 </div>
 
-<div class="footer">
-  Données sauvegardées localement sur votre appareil<br>
-  Fonctionne hors connexion après le premier chargement
+<div id="bbar">
+  <button class="ab ab-new" id="btn-new">+ Nouvelle</button>
+  <button class="ab ab-save" id="btn-save">💾 Sauvegarder</button>
+  <button class="ab ab-pdf" id="btn-print">🖨 PDF</button>
 </div>
 
+<div id="plist">
+  <div class="pl-head">
+    <div class="pl-title">📋 Fiches sauvegardées</div>
+    <button class="hb" id="btn-close-list">✕ Fermer</button>
+  </div>
+  <div class="pl-inner" id="pl-inner"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var SECS=[
+  {id:"cadre",   icon:"🏗", title:"Cadre & Direction",   items:["Cadre (rouille, fissures, chocs)","Fourche avant (jeu, alignement)","Direction / pivot (roulements)","Potence (serrage, alignement)"]},
+  {id:"frein",   icon:"🛑", title:"Freinage",             items:["Levier frein avant","Levier frein arrière","Patins / plaquettes avant","Patins / plaquettes arrière","Câbles et gaines","Efficacité freinage AV","Efficacité freinage AR"]},
+  {id:"roues",   icon:"🔵", title:"Roues & Pneus",        items:["Pneu avant — Pression : ___ bar","Pneu arrière — Pression : ___ bar","Jante avant (voilage)","Jante arrière (voilage)","Rayons AV & AR","Roulements de roues"]},
+  {id:"transm",  icon:"⚙️", title:"Transmission",         items:["Chaîne (usure, rouille)","Pédalier / manivelles","Pédales","Plateau(x) et cassette","Dérailleur avant","Dérailleur arrière","Passage des vitesses"]},
+  {id:"ergo",    icon:"🪑", title:"Position & Ergonomie", items:["Selle (état, fixation) — H: ___ cm","Tige de selle (serrage)","Guidon / grips","Hauteur guidon : ___ cm"]},
+  {id:"eclairage",icon:"💡",title:"Éclairage & Sécurité", items:["Phare avant (blanc)","Feu arrière (rouge)","Catadioptres","Sonnette","Réflecteurs pédales"]},
+  {id:"access",  icon:"🧰", title:"Accessoires",           items:["Garde-boue AV & AR","Béquille","Porte-bagages"]},
+  {id:"vae",     icon:"⚡", title:"VAE — Électrique",      items:["Batterie (état, charge ___%)","Chargeur","Moteur (bruit, fixation)","Console / écran","Câblage électrique"]}
+];
+
+var ratings={}, obsMap={}, photos=[], curId=null;
+var FIELDS=['nom','tel','nbon','d_recep','technicien','demande','marque','modele','couleur','type_velo','vae','ncadre','bicycode','historique','cout','devis','remarques','dmotif'];
+var totalItems=0;
+SECS.forEach(function(s){totalItems+=s.items.length;});
+
+// ── DIAG ──
+function buildDiag(){
+  var dw=document.getElementById('diag-wrap');
+  var sn=document.getElementById('snav');
+  dw.innerHTML='';
+  sn.innerHTML='';
+  // pill client/velo/photos
+  ['#sec-client:👤 Client','#sec-velo:🚲 Vélo','#sec-photos:📷 Photos'].forEach(function(s){
+    var p=s.split(':');
+    var a=document.createElement('a');a.href=p[0];a.textContent=p[1];sn.appendChild(a);
+  });
+  var idx=0;
+  SECS.forEach(function(sec){
+    var a=document.createElement('a');a.href='#sec-'+sec.id;a.textContent=sec.icon+' '+sec.title;sn.appendChild(a);
+    var sh=document.createElement('div');sh.className='dsec';sh.id='sec-'+sec.id;sh.textContent=sec.icon+' '+sec.title;dw.appendChild(sh);
+    sec.items.forEach(function(item){
+      var i=idx++;
+      var r=ratings[i];
+      var cls='di'+(r===1?' ok':r===2?' warn':r===3?' bad':'');
+      var div=document.createElement('div');
+      div.className=cls;div.setAttribute('data-di',i);
+      div.innerHTML='<div class="di-label">'+item+'</div>'
+        +'<div class="btns3">'
+        +'<button class="b3'+(r===1?' ok-sel':'')+'" data-i="'+i+'" data-v="1">✅ OK</button>'
+        +'<button class="b3'+(r===2?' warn-sel':'')+'" data-i="'+i+'" data-v="2">⚠️ Surveiller</button>'
+        +'<button class="b3'+(r===3?' bad-sel':'')+'" data-i="'+i+'" data-v="3">❌ Remplacer</button>'
+        +'</div>'
+        +'<input class="obs-in" data-oi="'+i+'" type="text" placeholder="Observations…" value="'+(obsMap[i]||'').replace(/"/g,'&quot;')+'">';
+      dw.appendChild(div);
+    });
+  });
+  // pill synthèse
+  var as=document.createElement('a');as.href='#sec-synth';as.textContent='📋 Synthèse';sn.appendChild(as);
+  // délégation événements sur diag-wrap
+  dw.addEventListener('touchend',function(e){
+    var btn=e.target.closest('.b3');
+    if(btn){e.preventDefault();doRate(parseInt(btn.getAttribute('data-i')),parseInt(btn.getAttribute('data-v')));return;}
+  });
+  dw.addEventListener('click',function(e){
+    var btn=e.target.closest('.b3');
+    if(btn){doRate(parseInt(btn.getAttribute('data-i')),parseInt(btn.getAttribute('data-v')));return;}
+    var inp=e.target.closest('[data-oi]');
+  });
+  dw.addEventListener('input',function(e){
+    var inp=e.target.closest('[data-oi]');
+    if(inp) obsMap[parseInt(inp.getAttribute('data-oi'))]=inp.value;
+  });
+}
+
+function doRate(i,v){
+  ratings[i]=(ratings[i]===v)?undefined:v;
+  if(ratings[i]===undefined) delete ratings[i];
+  var div=document.querySelector('[data-di="'+i+'"]');
+  if(!div)return;
+  var r=ratings[i];
+  div.className='di'+(r===1?' ok':r===2?' warn':r===3?' bad':'');
+  div.querySelectorAll('.b3').forEach(function(btn){
+    var bv=parseInt(btn.getAttribute('data-v'));
+    btn.className='b3'+(r===1&&bv===1?' ok-sel':r===2&&bv===2?' warn-sel':r===3&&bv===3?' bad-sel':'');
+  });
+  updateScore();updateSynth();
+}
+
+// ── SCORE ──
+function updateScore(){
+  var total=Object.keys(ratings).length;
+  var ok=0,warn=0,bad=0;
+  Object.values(ratings).forEach(function(v){if(v===1)ok++;else if(v===2)warn++;else if(v===3)bad++;});
+  document.getElementById('prog-bar').style.width=Math.round(total/totalItems*100)+'%';
+  document.getElementById('prog-lbl').textContent=total+' / '+totalItems+' éléments notés';
+  var sb=document.getElementById('score-big');
+  var sc=document.getElementById('score-chips');
+  var sw=document.getElementById('score-wrap');
+  if(!total){sb.textContent='Aucun élément noté';sc.innerHTML='';sw.style.background='var(--blue2)';return;}
+  sb.textContent=bad>0?'⚠️ Travaux urgents requis':warn>0?'À réviser':'✅ Bon état général';
+  sw.style.background=bad>0?'#C0392B':warn>0?'#D4860A':'#1D9E75';
+  sc.innerHTML='<div class="chip">✅ '+ok+'</div><div class="chip">⚠️ '+warn+'</div><div class="chip">❌ '+bad+'</div>';
+}
+
+// ── SYNTHÈSE ──
+function updateSynth(){
+  var badI=[],warnI=[];
+  var idx=0;
+  SECS.forEach(function(sec){sec.items.forEach(function(item){
+    if(ratings[idx]===3)badI.push(item);
+    else if(ratings[idx]===2)warnI.push(item);
+    idx++;
+  });});
+  var html='';
+  if(badI.length) html+='<div class="syb u"><div class="syl">❌ À remplacer / urgents</div><div class="sitems">'+badI.map(function(x){return '• '+x;}).join('<br>')+'</div></div>';
+  if(warnI.length) html+='<div class="syb w"><div class="syl">⚠️ À surveiller</div><div class="sitems">'+warnI.map(function(x){return '• '+x;}).join('<br>')+'</div></div>';
+  if(!badI.length&&!warnI.length&&Object.keys(ratings).length) html='<div class="syb r"><div class="syl">✅ Vélo en bon état</div><div class="sitems">Aucun élément problématique.</div></div>';
+  document.getElementById('synth-auto').innerHTML=html;
+}
+
+// ── PHOTOS ──
+function renderPhotos(){
+  var g=document.getElementById('pgrid');if(!g)return;
+  g.innerHTML='';
+  photos.forEach(function(src,i){
+    var d=document.createElement('div');d.className='pc';
+    var img=document.createElement('img');img.src=src;
+    var del=document.createElement('button');del.className='pdel';del.textContent='✕';del.setAttribute('data-pi',i);
+    d.appendChild(img);d.appendChild(del);g.appendChild(d);
+  });
+  if(photos.length<9){
+    var add=document.createElement('div');add.className='pc padd';
+    add.innerHTML='<span class="ic">📷</span><span style="font-size:12px">Ajouter</span>';
+    add.setAttribute('data-addphoto','1');
+    g.appendChild(add);
+  }
+}
+// délégation photos
+document.getElementById('pgrid').addEventListener('touchend',function(e){
+  var del=e.target.closest('[data-pi]');
+  if(del){e.preventDefault();photos.splice(parseInt(del.getAttribute('data-pi')),1);renderPhotos();return;}
+  var add=e.target.closest('[data-addphoto]');
+  if(add){e.preventDefault();document.getElementById('pinput').click();}
+});
+document.getElementById('pgrid').addEventListener('click',function(e){
+  var del=e.target.closest('[data-pi]');
+  if(del){photos.splice(parseInt(del.getAttribute('data-pi')),1);renderPhotos();return;}
+  var add=e.target.closest('[data-addphoto]');
+  if(add){document.getElementById('pinput').click();}
+});
+document.getElementById('pinput').addEventListener('change',function(e){
+  var files=Array.from(e.target.files),done=0;
+  if(!files.length)return;
+  files.forEach(function(f){
+    if(photos.length>=9){done++;if(done>=files.length)renderPhotos();return;}
+    var r=new FileReader();
+    r.onload=function(ev){photos.push(ev.target.result);done++;if(done>=files.length)renderPhotos();};
+    r.readAsDataURL(f);
+  });
+  this.value='';
+});
+
+// ── SAVE / LOAD ──
+function collect(){
+  var d={id:curId||Date.now()};
+  FIELDS.forEach(function(k){var el=document.getElementById(k);if(el)d[k]=el.value;});
+  d.dcheck=document.getElementById('dcheck').checked;
+  d.ratings=Object.assign({},ratings);
+  d.obs=Object.assign({},obsMap);
+  d.photos=photos.slice();
+  return d;
+}
+function restore(d){
+  curId=d.id;
+  FIELDS.forEach(function(k){var el=document.getElementById(k);if(el&&d[k]!==undefined)el.value=d[k];});
+  document.getElementById('dcheck').checked=!!d.dcheck;
+  ratings=Object.assign({},d.ratings||{});
+  obsMap=Object.assign({},d.obs||{});
+  photos=(d.photos||[]).slice();
+  buildDiag();updateScore();updateSynth();renderPhotos();updateSub();
+}
+function saveFiche(){
+  var d=collect();
+  var list=JSON.parse(localStorage.getItem('vfd')||'[]');
+  var idx=list.findIndex(function(f){return f.id===d.id;});
+  if(idx>=0)list[idx]=d;else list.unshift(d);
+  localStorage.setItem('vfd',JSON.stringify(list));
+  curId=d.id;toast('✅ Fiche sauvegardée !');
+}
+function loadFiche(id){
+  var list=JSON.parse(localStorage.getItem('vfd')||'[]');
+  var f=list.find(function(x){return x.id===id;});
+  if(!f)return;
+  restore(f);closePlist();
+  window.scrollTo(0,0);toast('📂 Fiche chargée');
+}
+function delFiche(id){
+  if(!confirm('Supprimer cette fiche ?'))return;
+  var list=JSON.parse(localStorage.getItem('vfd')||'[]');
+  localStorage.setItem('vfd',JSON.stringify(list.filter(function(f){return f.id!==id;})));
+  renderPlist();toast('🗑 Supprimée');
+}
+function newFiche(){
+  if(!confirm('Nouvelle fiche ? Données non sauvegardées perdues.'))return;
+  curId=null;ratings={};obsMap={};photos=[];
+  FIELDS.forEach(function(k){var el=document.getElementById(k);if(el)el.value='';});
+  document.getElementById('dcheck').checked=false;
+  document.getElementById('nbon').value=Math.floor(Math.random()*9000)+1000;
+  document.getElementById('d_recep').value=new Date().toISOString().split('T')[0];
+  buildDiag();updateScore();updateSynth();renderPhotos();updateSub();
+  window.scrollTo(0,0);toast('📄 Nouvelle fiche');
+}
+function updateSub(){
+  var n=document.getElementById('nom').value;
+  var m=document.getElementById('marque').value;
+  document.getElementById('nsub').textContent=(n||m)?(n+(n&&m?' — ':'')+m):'Nouvelle fiche';
+}
+document.getElementById('nom').addEventListener('input',updateSub);
+document.getElementById('marque').addEventListener('input',updateSub);
+
+// ── LISTE — délégation événements ──
+function openPlist(){renderPlist();document.getElementById('plist').style.display='block';}
+function closePlist(){document.getElementById('plist').style.display='none';}
+function renderPlist(){
+  var list=JSON.parse(localStorage.getItem('vfd')||'[]');
+  var el=document.getElementById('pl-inner');
+  if(!list.length){el.innerHTML='<div class="empty"><div class="ico">📭</div><p>Aucune fiche sauvegardée.</p></div>';return;}
+  el.innerHTML='';
+  list.forEach(function(f){
+    var bad=Object.values(f.ratings||{}).filter(function(v){return v===3;}).length;
+    var warn=Object.values(f.ratings||{}).filter(function(v){return v===2;}).length;
+    var ico=bad>0?'❌':warn>0?'⚠️':'✅';
+    var date=f.d_recep?new Date(f.d_recep).toLocaleDateString('fr-FR'):'—';
+    var row=document.createElement('div');row.className='plc';
+    row.innerHTML='<div class="plico">🚲</div>'
+      +'<div class="plinf"><div class="plnom">'+(f.nom||'Sans nom')+(f.marque?' — '+f.marque:'')+'</div>'
+      +'<div class="plmeta">'+date+(f.nbon?' · N°'+f.nbon:'')+(f.technicien?' · '+f.technicien:'')+'</div></div>'
+      +'<div style="font-size:22px">'+ico+'</div>'
+      +'<div class="pl-btns">'
+      +'<button class="plb plb-open" data-load="'+f.id+'">Ouvrir</button>'
+      +'<button class="plb plb-del" data-del="'+f.id+'">✕</button>'
+      +'</div>';
+    el.appendChild(row);
+  });
+}
+// délégation sur pl-inner — la clé de la correction
+document.getElementById('pl-inner').addEventListener('touchend',function(e){
+  var btn=e.target.closest('[data-load]');
+  if(btn){e.preventDefault();loadFiche(parseInt(btn.getAttribute('data-load')));return;}
+  btn=e.target.closest('[data-del]');
+  if(btn){e.preventDefault();delFiche(parseInt(btn.getAttribute('data-del')));return;}
+});
+document.getElementById('pl-inner').addEventListener('click',function(e){
+  var btn=e.target.closest('[data-load]');
+  if(btn){loadFiche(parseInt(btn.getAttribute('data-load')));return;}
+  btn=e.target.closest('[data-del]');
+  if(btn){delFiche(parseInt(btn.getAttribute('data-del')));return;}
+});
+
+// ── TOAST ──
+var tt=null;
+function toast(msg){
+  var el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('on');
+  clearTimeout(tt);tt=setTimeout(function(){el.classList.remove('on');},2200);
+}
+
+// ── BIND BOUTONS FIXES — délégation sur body ──
+function bind(id,fn){
+  var el=document.getElementById(id);if(!el)return;
+  el.addEventListener('touchend',function(e){e.preventDefault();fn();});
+  el.addEventListener('click',fn);
+}
+bind('btn-list',openPlist);
+bind('btn-close-list',closePlist);
+bind('btn-pdf',function(){window.print();});
+bind('btn-new',newFiche);
+bind('btn-save',saveFiche);
+bind('btn-print',function(){window.print();});
+
+// ── INIT ──
+document.getElementById('nbon').value=Math.floor(Math.random()*9000)+1000;
+document.getElementById('d_recep').value=new Date().toISOString().split('T')[0];
+buildDiag();
+renderPhotos();
+</script>
 
 
 </body></html>
