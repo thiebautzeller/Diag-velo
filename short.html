@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)file:///Users/macminioctaedre/Downloads/short_2.html -->
+<!-- saved from url=(0052)file:///Users/macminioctaedre/Downloads/short_4.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -96,11 +96,99 @@ body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:15p
 .empty .ico{font-size:52px;margin-bottom:12px}
 #toast{position:fixed;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(16px);background:#111;color:#fff;padding:10px 22px;border-radius:22px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:999;pointer-events:none;white-space:nowrap}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-@media print{
-  #hdr,#bbar,#plist,#toast,.pdel,.padd,#pinput{display:none!important}
+
   body{padding-bottom:0;background:#fff}
   .di,.card{break-inside:avoid}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ── IMPRESSION 2 PAGES ── */
+@media print {
+  /* Masquer tout ce qui n'est pas utile */
+  #hdr,#bbar,#plist,#toast,.pdel,.padd,#pinput,#import-input,
+  .score-wrap,.pgrid,#sec-photos,.snav,#prog-wrap,#prog-lbl{display:none!important}
+
+  /* Reset mise en page */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box}
+  html,body{overflow:visible!important;height:auto!important;background:#fff!important;margin:0!important;padding:0!important;font-size:11px!important}
+  .wrap{padding:4px 6px!important;padding-bottom:0!important}
+
+  /* Titre de page en haut */
+  body::before{
+    content:"🚲 Fiche de diagnostic vélo";
+    display:block;background:#1F3864;color:#fff;
+    font-family:Arial,sans-serif;font-size:14px;font-weight:bold;
+    padding:6px 12px;margin-bottom:6px;
+  }
+
+  /* Sections client et vélo côte à côte sur 1 ligne */
+  #sec-client,#sec-velo{
+    display:inline-block!important;
+    width:49%!important;
+    vertical-align:top!important;
+    margin-bottom:4px!important;
+    font-size:10px!important;
+  }
+  #sec-client{margin-right:1%!important}
+
+  /* Champs compacts */
+  .card{border-radius:4px!important;margin-bottom:4px!important;border:1px solid #ccc!important}
+  .ch{padding:4px 8px!important;font-size:11px!important}
+  .cb{padding:6px 8px!important}
+  .f{margin-bottom:4px!important}
+  .f label{font-size:9px!important;margin-bottom:2px!important}
+  .f input,.f select,.f textarea{padding:3px 6px!important;font-size:10px!important;border:1px solid #ccc!important;border-radius:3px!important;min-height:0!important}
+  .f textarea{min-height:20px!important}
+  .r2{gap:5px!important}
+  .r3{gap:4px!important}
+
+  /* Grille diagnostic */
+  #sec-photos{display:none!important}
+  .dsec{padding:4px 10px!important;font-size:11px!important;margin:5px 0 3px!important;border-radius:4px!important}
+  .di{padding:3px 8px!important;margin-bottom:3px!important;border-radius:4px!important}
+  .di-label{font-size:10px!important;margin-bottom:4px!important}
+  .btns3{gap:3px!important;margin-bottom:4px!important}
+  .b3{height:22px!important;font-size:9px!important;border-radius:4px!important;padding:0 3px!important}
+  .b3 .ic{font-size:9px!important}
+  .obs-in{padding:3px 5px!important;font-size:9px!important;border-radius:3px!important}
+
+  /* Synthèse */
+  #sec-synth .ch{padding:4px 8px!important;font-size:11px!important}
+  #sec-synth .cb{padding:6px 8px!important}
+  .syb{padding-left:7px!important;margin-bottom:6px!important}
+  .syl{font-size:9px!important;margin-bottom:2px!important}
+  .sitems{font-size:10px!important;line-height:1.4!important}
+  #sec-synth textarea{min-height:18px!important;padding:3px 5px!important;font-size:10px!important}
+  #sec-synth .r2{gap:5px!important}
+  #sec-synth input[type=number]{padding:3px 5px!important;font-size:10px!important}
+  #sec-synth select{padding:3px 5px!important;font-size:10px!important}
+
+  /* Danger */
+  .dbox{padding:6px 10px!important;margin-bottom:5px!important;border-radius:4px!important}
+  .dtog span{font-size:11px!important}
+  .dbox .obs-in{min-height:16px!important;font-size:9px!important}
+
+  /* Signatures */
+  .card:last-of-type .r2>div{min-height:40px!important;padding:5px!important}
+  .card:last-of-type p{font-size:9px!important;margin-top:4px!important}
+
+  /* Eviter les coupures de page dans les blocs */
+  .di,.dsec,.card,.dbox{break-inside:avoid}
+
+  /* Saut de page entre diagnostic et synthèse */
+  #sec-synth{break-before:page}
+
+  /* Couleurs impression */
+  .ds,.dsec{background:#2E75B6!important;color:#fff!important}
+  .ch{background:#1F3864!important;color:#fff!important}
+  .b3.ok-sel{background:#E1F5EE!important;border-color:#1D9E75!important;color:#1D9E75!important}
+  .b3.warn-sel{background:#FFF8E6!important;border-color:#EF9F27!important;color:#8A5C00!important}
+  .b3.bad-sel{background:#FEE8E8!important;border-color:#E24B4A!important;color:#E24B4A!important}
+  .dbox{background:#FFF4EE!important;border-color:#C55A11!important}
+  .dtog span{color:#C55A11!important}
+  .syb.u{border-color:#E24B4A!important}
+  .syb.r{border-color:#2E75B6!important}
+  .syb.w{border-color:#EF9F27!important}
 }
 </style>
 </head>
@@ -119,7 +207,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:15p
   </div>
   <div id="prog-wrap"><div id="prog-bar"></div></div>
   <div id="prog-lbl">0 élément noté</div>
-  <div class="snav" id="snav"><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-client">👤 Client</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-velo">🚲 Vélo</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-photos">📷 Photos</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-cadre">🏗 Cadre &amp; Direction</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-frein">🛑 Freinage</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-roues">🔵 Roues &amp; Pneus</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-transm">⚙️ Transmission</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-ergo">🪑 Position &amp; Ergonomie</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-eclairage">💡 Éclairage &amp; Sécurité</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-access">🧰 Accessoires</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-vae">⚡ VAE — Électrique</a><a href="file:///Users/macminioctaedre/Downloads/short_2.html#sec-synth">📋 Synthèse</a></div>
+  <div class="snav" id="snav"><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-client">👤 Client</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-velo">🚲 Vélo</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-photos">📷 Photos</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-cadre">🏗 Cadre &amp; Direction</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-frein">🛑 Freinage</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-roues">🔵 Roues &amp; Pneus</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-transm">⚙️ Transmission</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-ergo">🪑 Position &amp; Ergonomie</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-eclairage">💡 Éclairage &amp; Sécurité</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-access">🧰 Accessoires</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-vae">⚡ VAE — Électrique</a><a href="file:///Users/macminioctaedre/Downloads/short_4.html#sec-synth">📋 Synthèse</a></div>
 </div>
 
 <div class="wrap">
@@ -514,10 +602,10 @@ bind('btn-list',openPlist);
 bind('btn-exp',exportFiche);
 bind('btn-imp',importFiche);
 bind('btn-close-list',closePlist);
-bind('btn-pdf',function(){window.print();});
+bind('btn-pdf',printFiche);
 bind('btn-new',newFiche);
 bind('btn-save',saveFiche);
-bind('btn-print',function(){window.print();});
+bind('btn-print',printFiche);
 
 
 // ── EXPORT / IMPORT FICHIERS ──
@@ -561,6 +649,15 @@ document.getElementById('import-input').addEventListener('change',function(e){
   this.value='';
 });
 
+
+// ── IMPRESSION PROPRE ──
+function printFiche(){
+  // S'assurer que diagnostic et synthèse sont buildés
+  if(typeof buildDiag === 'function') buildDiag();
+  if(typeof updateScore === 'function') updateScore();
+  if(typeof updateSynth === 'function') updateSynth();
+  window.print();
+}
 // ── INIT ──
 document.getElementById('nbon').value=Math.floor(Math.random()*9000)+1000;
 document.getElementById('d_recep').value=new Date().toISOString().split('T')[0];
