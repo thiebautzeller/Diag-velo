@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)file:///Users/macminioctaedre/Downloads/fiche_diagnostic_velo_iphone.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Diagnostic Vélo</title>
+<style>
+:root{
+  --blue:#1F3864;--blue2:#2E75B6;--blue3:#D6E4F0;
+  --orange:#C55A11;--green:#1D9E75;--amber:#EF9F27;--red:#E24B4A;
+  --bg:#F2F4F8;--card:#fff;--border:#DDE3ED;--text:#1a1a1a;--muted:#6B7280;
+  --radius:12px;--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',Arial,sans-serif;font-size:15px;color:var(--text);background:var(--bg)}
+
+/* ── NAV BAR ── */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);padding:env(safe-area-inset-top,0) 0 0;display:flex;flex-direction:column}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;gap:8px}
+.nav-title{color:#fff;font-size:16px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-sub{color:#BDD7EE;font-size:11px;margin-top:1px}
+.nav-actions{display:flex;gap:6px}
+.nav-btn{background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;-webkit-appearance:none}
+.nav-btn.accent{background:var(--blue2)}
+.nav-btn:active{opacity:.7}
+
+/* ── TABS ── */
+.tabs{display:flex;background:var(--blue);padding:0 14px 0;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 14px;font-size:13px;font-weight:600;color:rgba(255,255,255,.6);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:all .15s;-webkit-appearance:none}
+.tab.active{color:#fff;border-bottom-color:#fff}
+.tab:active{opacity:.7}
+
+/* ── CONTENT ── */
+.content{position:fixed;top:0;left:0;right:0;bottom:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(20px + var(--safe-bottom))}
+.content-inner{padding:12px}
+
+.page{display:none}
+.page.active{display:block}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:12px}
+.card-head{background:var(--blue);color:#fff;padding:10px 14px;font-size:13px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.card-head .icon{font-size:16px}
+.card-body{padding:12px 14px}
+
+/* ── FIELDS ── */
+.field{margin-bottom:10px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:15px;font-family:inherit;color:var(--text);background:var(--card);-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.field textarea{resize:none;min-height:72px;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+/* ── DIAGNOSTIC ITEMS ── */
+.diag-section{background:var(--blue2);color:#fff;padding:8px 14px;font-size:13px;font-weight:700;border-radius:8px;margin:10px 0 6px;display:flex;align-items:center;gap:6px}
+.diag-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.diag-item-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.4}
+.rating-row{display:flex;gap:6px;margin-bottom:8px}
+.rating-btn{flex:1;height:38px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;-webkit-appearance:none;transition:all .12s}
+.rating-btn.sel-1{background:#FCEBEB;border-color:var(--red);color:var(--red)}
+.rating-btn.sel-2{background:#FFF4EE;border-color:var(--orange);color:var(--orange)}
+.rating-btn.sel-3{background:#FAEEDA;border-color:var(--amber);color:#854F0B}
+.rating-btn.sel-4{background:#E6F1FB;border-color:var(--blue2);color:var(--blue2)}
+.rating-btn.sel-5{background:#E1F5EE;border-color:var(--green);color:var(--green)}
+.rating-btn:active{transform:scale(.93)}
+.obs-field{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--text);background:var(--bg);-webkit-appearance:none}
+.obs-field:focus{outline:none;border-color:var(--blue2)}
+
+/* ── SCORE BADGE ── */
+.score-card{background:var(--blue);border-radius:var(--radius);padding:16px;text-align:center;margin-bottom:12px;color:#fff}
+.score-num{font-size:48px;font-weight:800;line-height:1}
+.score-sub{font-size:12px;opacity:.7;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.score-bar{display:flex;gap:5px;justify-content:center;margin-top:10px}
+.score-pip{height:6px;flex:1;border-radius:3px;background:rgba(255,255,255,.2);max-width:40px}
+.score-pip.on{background:#fff}
+.score-label-row{display:flex;justify-content:space-between;margin-top:4px;font-size:10px;opacity:.6}
+
+/* ── SYNTH ── */
+.synth-urgents{border-left:4px solid var(--red);padding-left:10px;margin-bottom:10px}
+.synth-reco{border-left:4px solid var(--blue2);padding-left:10px;margin-bottom:10px}
+.synth-watch{border-left:4px solid var(--amber);padding-left:10px;margin-bottom:10px}
+.synth-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.synth-urgents .synth-label{color:var(--red)}
+.synth-reco .synth-label{color:var(--blue2)}
+.synth-watch .synth-label{color:var(--amber)}
+
+/* ── WARNING ── */
+.danger-card{background:#FFF4EE;border:2px solid var(--orange);border-radius:var(--radius);padding:12px 14px;margin-bottom:12px}
+.danger-toggle{display:flex;align-items:center;gap:10px;cursor:pointer}
+.danger-toggle input[type=checkbox]{width:22px;height:22px;accent-color:var(--orange);flex-shrink:0}
+.danger-label{font-size:14px;font-weight:700;color:var(--orange);line-height:1.3}
+
+/* ── PHOTOS ── */
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.photo-thumb{aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.photo-thumb img{width:100%;height:100%;object-fit:cover}
+.photo-thumb .del-btn{position:absolute;top:4px;right:4px;width:22px;height:22px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;font-size:14px;line-height:22px;text-align:center;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.photo-add{border-style:dashed;color:var(--muted);flex-direction:column;gap:4px;font-size:12px}
+.photo-add .cam-icon{font-size:28px}
+#photo-input{display:none}
+
+/* ── FICHES SAUVEGARDÉES ── */
+.fiche-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.fiche-item:active{background:var(--bg)}
+.fiche-avatar{width:44px;height:44px;border-radius:10px;background:var(--blue3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.fiche-info{flex:1;min-width:0}
+.fiche-nom{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fiche-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.fiche-score{font-size:18px;font-weight:800}
+.fiche-actions{display:flex;gap:6px}
+.btn-small{border:none;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;-webkit-appearance:none}
+.btn-small:active{opacity:.7}
+.btn-load{background:var(--blue3);color:var(--blue)}
+.btn-del{background:#FCEBEB;color:var(--red)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .big{font-size:48px;margin-bottom:10px}
+.empty-state p{font-size:14px}
+
+/* ── BOTTOM ACTIONS ── */
+.bottom-actions{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);padding:10px 14px calc(10px + var(--safe-bottom));display:flex;gap:8px;z-index:100}
+.action-btn{flex:1;padding:13px;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;-webkit-appearance:none;transition:all .1s}
+.action-btn:active{transform:scale(.97);opacity:.85}
+.btn-save{background:var(--green);color:#fff}
+.btn-pdf{background:var(--blue2);color:#fff}
+.btn-new{background:var(--bg);color:var(--blue);border:1.5px solid var(--border)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(80px + var(--safe-bottom));left:50%;transform:translateX(-50%) translateY(20px);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media print{
+  .navbar,.tabs,.bottom-actions,.tab,.nav-btn,.btn-small,.del-btn,.photo-add,#photo-input{display:none!important}
+  .content{position:static;overflow:visible;padding:0}
+  .content-inner{padding:8px}
+  body,html{overflow:visible;height:auto}
+  .page{display:block!important}
+  #page-list,.danger-card input[type=checkbox]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .diag-section,.card-head,.score-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rating-btn{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <div>
+      <div class="nav-title">🚲 Diagnostic Vélo</div>
+      <div class="nav-sub" id="nav-sub">Nouvelle fiche</div>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="showPage(&#39;list&#39;)">📋 Fiches</button>
+      <button class="nav-btn accent" onclick="window.print()">🖨</button>
+    </div>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="showTab(0)">👤 Client</button>
+    <button class="tab" onclick="showTab(1)">🚲 Vélo</button>
+    <button class="tab" onclick="showTab(2)">📷 Photos</button>
+    <button class="tab" onclick="showTab(3)">🔧 Diagnostic</button>
+    <button class="tab" onclick="showTab(4)">📊 Synthèse</button>
+  </div>
+</div>
+
+<div class="content" id="main-content">
+<div class="content-inner" id="content-inner" style="padding-top:calc(env(safe-area-inset-top,0px) + 108px)">
+
+<!-- PAGE FICHE -->
+<div id="page-fiche">
+
+  <!-- TAB 0 : CLIENT -->
+  <div class="page active" id="tab0">
+    <div class="card">
+      <div class="card-head"><span class="icon">👤</span>Identification client &amp; bon de dépôt</div>
+      <div class="card-body">
+        <div class="field"><label>Nom &amp; Prénom</label><input type="text" id="nom" autocomplete="name" placeholder="Jean Dupont"></div>
+        <div class="row2">
+          <div class="field"><label>Téléphone</label><input type="tel" id="tel" placeholder="06 …"></div>
+          <div class="field"><label>Email</label><input type="email" id="email" placeholder="email@…"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>N° client</label><input type="text" id="nclient" placeholder="CLI-…"></div>
+          <div class="field"><label>N° bon de dépôt</label><input type="text" id="nbon" placeholder="auto"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Date réception</label><input type="date" id="d_recep"></div>
+          <div class="field"><label>Restitution prévue</label><input type="date" id="d_rest"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Technicien</label><input type="text" id="technicien" placeholder="Prénom"></div>
+          <div class="field"><label>Photos prises</label>
+            <select id="photos_ok"><option value="">—</option><option>Oui</option><option>Non</option></select>
+          </div>
+        </div>
+        <div class="field"><label>Demande du client</label><textarea id="demande" placeholder="Décrire la demande ou la plainte..."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 1 : VÉLO -->
+  <div class="page" id="tab1">
+    <div class="card">
+      <div class="card-head"><span class="icon">🚲</span>Identification du vélo</div>
+      <div class="card-body">
+        <div class="row2">
+          <div class="field"><label>Marque</label><input type="text" id="marque" placeholder="Ex : Trek"></div>
+          <div class="field"><label>Modèle</label><input type="text" id="modele" placeholder="Ex : FX3"></div>
+        </div>
+        <div class="row3">
+          <div class="field"><label>Couleur</label><input type="text" id="couleur" placeholder="Noir…"></div>
+          <div class="field"><label>Type</label>
+            <select id="type_velo"><option value="">—</option><option>Ville</option><option>VTT</option><option>Route</option><option>Cargo</option><option>Enfant</option><option>Autre</option></select>
+          </div>
+          <div class="field"><label>VAE ?</label>
+            <select id="vae"><option value="Non">Non</option><option value="Oui">Oui</option></select>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>N° cadre</label><input type="text" id="ncadre" placeholder="Sous le pédalier"></div>
+          <div class="field"><label>N° Bicycode</label><input type="text" id="bicycode" placeholder="Marquage anti-vol"></div>
+        </div>
+        <div class="field"><label>Historique / incidents déclarés</label><textarea id="historique" placeholder="Dernière révision, chutes, pannes connues..."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2 : PHOTOS -->
+  <div class="page" id="tab2">
+    <div class="card">
+      <div class="card-head"><span class="icon">📷</span>Photos du vélo</div>
+      <div class="card-body">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:8px">Appuyez sur + pour prendre une photo ou choisir depuis l'album. Max 9 photos.</p>
+        <div class="photo-grid" id="photo-grid"><div class="photo-thumb photo-add"><span class="cam-icon">📷</span><span>Ajouter</span></div></div>
+        <input type="file" id="photo-input" accept="image/*" capture="environment" multiple="">
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3 : DIAGNOSTIC -->
+  <div class="page" id="tab3">
+    <div id="diag-container"><div class="diag-section">🏗 CADRE &amp; DIRECTION</div><div class="diag-item"><div class="diag-item-label">Cadre (rouille, fissures, chocs)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_0_1" onclick="setRating(0,1)">1</button><button class="rating-btn" id="rb_0_2" onclick="setRating(0,2)">2</button><button class="rating-btn" id="rb_0_3" onclick="setRating(0,3)">3</button><button class="rating-btn" id="rb_0_4" onclick="setRating(0,4)">4</button><button class="rating-btn" id="rb_0_5" onclick="setRating(0,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_0" type="text" placeholder="Observations…" oninput="observations[0]=this.value"></div><div class="diag-item"><div class="diag-item-label">Fourche avant (jeu, alignement)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_1_1" onclick="setRating(1,1)">1</button><button class="rating-btn" id="rb_1_2" onclick="setRating(1,2)">2</button><button class="rating-btn" id="rb_1_3" onclick="setRating(1,3)">3</button><button class="rating-btn" id="rb_1_4" onclick="setRating(1,4)">4</button><button class="rating-btn" id="rb_1_5" onclick="setRating(1,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_1" type="text" placeholder="Observations…" oninput="observations[1]=this.value"></div><div class="diag-item"><div class="diag-item-label">Direction / pivot (roulements)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_2_1" onclick="setRating(2,1)">1</button><button class="rating-btn" id="rb_2_2" onclick="setRating(2,2)">2</button><button class="rating-btn" id="rb_2_3" onclick="setRating(2,3)">3</button><button class="rating-btn" id="rb_2_4" onclick="setRating(2,4)">4</button><button class="rating-btn" id="rb_2_5" onclick="setRating(2,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_2" type="text" placeholder="Observations…" oninput="observations[2]=this.value"></div><div class="diag-item"><div class="diag-item-label">Potence (serrage, alignement guidon)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_3_1" onclick="setRating(3,1)">1</button><button class="rating-btn" id="rb_3_2" onclick="setRating(3,2)">2</button><button class="rating-btn" id="rb_3_3" onclick="setRating(3,3)">3</button><button class="rating-btn" id="rb_3_4" onclick="setRating(3,4)">4</button><button class="rating-btn" id="rb_3_5" onclick="setRating(3,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_3" type="text" placeholder="Observations…" oninput="observations[3]=this.value"></div><div class="diag-section">🛑 FREINAGE</div><div class="diag-item"><div class="diag-item-label">Levier frein avant (course, souplesse)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_4_1" onclick="setRating(4,1)">1</button><button class="rating-btn" id="rb_4_2" onclick="setRating(4,2)">2</button><button class="rating-btn" id="rb_4_3" onclick="setRating(4,3)">3</button><button class="rating-btn" id="rb_4_4" onclick="setRating(4,4)">4</button><button class="rating-btn" id="rb_4_5" onclick="setRating(4,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_4" type="text" placeholder="Observations…" oninput="observations[4]=this.value"></div><div class="diag-item"><div class="diag-item-label">Levier frein arrière (course, souplesse)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_5_1" onclick="setRating(5,1)">1</button><button class="rating-btn" id="rb_5_2" onclick="setRating(5,2)">2</button><button class="rating-btn" id="rb_5_3" onclick="setRating(5,3)">3</button><button class="rating-btn" id="rb_5_4" onclick="setRating(5,4)">4</button><button class="rating-btn" id="rb_5_5" onclick="setRating(5,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_5" type="text" placeholder="Observations…" oninput="observations[5]=this.value"></div><div class="diag-item"><div class="diag-item-label">Patins / plaquettes avant (usure)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_6_1" onclick="setRating(6,1)">1</button><button class="rating-btn" id="rb_6_2" onclick="setRating(6,2)">2</button><button class="rating-btn" id="rb_6_3" onclick="setRating(6,3)">3</button><button class="rating-btn" id="rb_6_4" onclick="setRating(6,4)">4</button><button class="rating-btn" id="rb_6_5" onclick="setRating(6,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_6" type="text" placeholder="Observations…" oninput="observations[6]=this.value"></div><div class="diag-item"><div class="diag-item-label">Patins / plaquettes arrière (usure)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_7_1" onclick="setRating(7,1)">1</button><button class="rating-btn" id="rb_7_2" onclick="setRating(7,2)">2</button><button class="rating-btn" id="rb_7_3" onclick="setRating(7,3)">3</button><button class="rating-btn" id="rb_7_4" onclick="setRating(7,4)">4</button><button class="rating-btn" id="rb_7_5" onclick="setRating(7,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_7" type="text" placeholder="Observations…" oninput="observations[7]=this.value"></div><div class="diag-item"><div class="diag-item-label">Câbles et gaines (état, corrosion)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_8_1" onclick="setRating(8,1)">1</button><button class="rating-btn" id="rb_8_2" onclick="setRating(8,2)">2</button><button class="rating-btn" id="rb_8_3" onclick="setRating(8,3)">3</button><button class="rating-btn" id="rb_8_4" onclick="setRating(8,4)">4</button><button class="rating-btn" id="rb_8_5" onclick="setRating(8,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_8" type="text" placeholder="Observations…" oninput="observations[8]=this.value"></div><div class="diag-item"><div class="diag-item-label">Disques (voilage, épaisseur) — si disque</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_9_1" onclick="setRating(9,1)">1</button><button class="rating-btn" id="rb_9_2" onclick="setRating(9,2)">2</button><button class="rating-btn" id="rb_9_3" onclick="setRating(9,3)">3</button><button class="rating-btn" id="rb_9_4" onclick="setRating(9,4)">4</button><button class="rating-btn" id="rb_9_5" onclick="setRating(9,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_9" type="text" placeholder="Observations…" oninput="observations[9]=this.value"></div><div class="diag-item"><div class="diag-item-label">Efficacité freinage AV — test à vide</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_10_1" onclick="setRating(10,1)">1</button><button class="rating-btn" id="rb_10_2" onclick="setRating(10,2)">2</button><button class="rating-btn" id="rb_10_3" onclick="setRating(10,3)">3</button><button class="rating-btn" id="rb_10_4" onclick="setRating(10,4)">4</button><button class="rating-btn" id="rb_10_5" onclick="setRating(10,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_10" type="text" placeholder="Observations…" oninput="observations[10]=this.value"></div><div class="diag-item"><div class="diag-item-label">Efficacité freinage AR — test à vide</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_11_1" onclick="setRating(11,1)">1</button><button class="rating-btn" id="rb_11_2" onclick="setRating(11,2)">2</button><button class="rating-btn" id="rb_11_3" onclick="setRating(11,3)">3</button><button class="rating-btn" id="rb_11_4" onclick="setRating(11,4)">4</button><button class="rating-btn" id="rb_11_5" onclick="setRating(11,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_11" type="text" placeholder="Observations…" oninput="observations[11]=this.value"></div><div class="diag-section">🔵 ROUES &amp; PNEUMATIQUES</div><div class="diag-item"><div class="diag-item-label">Pneu avant — Pression : ___ bar</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_12_1" onclick="setRating(12,1)">1</button><button class="rating-btn" id="rb_12_2" onclick="setRating(12,2)">2</button><button class="rating-btn" id="rb_12_3" onclick="setRating(12,3)">3</button><button class="rating-btn" id="rb_12_4" onclick="setRating(12,4)">4</button><button class="rating-btn" id="rb_12_5" onclick="setRating(12,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_12" type="text" placeholder="Observations…" oninput="observations[12]=this.value"></div><div class="diag-item"><div class="diag-item-label">Pneu arrière — Pression : ___ bar</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_13_1" onclick="setRating(13,1)">1</button><button class="rating-btn" id="rb_13_2" onclick="setRating(13,2)">2</button><button class="rating-btn" id="rb_13_3" onclick="setRating(13,3)">3</button><button class="rating-btn" id="rb_13_4" onclick="setRating(13,4)">4</button><button class="rating-btn" id="rb_13_5" onclick="setRating(13,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_13" type="text" placeholder="Observations…" oninput="observations[13]=this.value"></div><div class="diag-item"><div class="diag-item-label">Jante avant (voilage latéral / radial)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_14_1" onclick="setRating(14,1)">1</button><button class="rating-btn" id="rb_14_2" onclick="setRating(14,2)">2</button><button class="rating-btn" id="rb_14_3" onclick="setRating(14,3)">3</button><button class="rating-btn" id="rb_14_4" onclick="setRating(14,4)">4</button><button class="rating-btn" id="rb_14_5" onclick="setRating(14,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_14" type="text" placeholder="Observations…" oninput="observations[14]=this.value"></div><div class="diag-item"><div class="diag-item-label">Jante arrière (voilage latéral / radial)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_15_1" onclick="setRating(15,1)">1</button><button class="rating-btn" id="rb_15_2" onclick="setRating(15,2)">2</button><button class="rating-btn" id="rb_15_3" onclick="setRating(15,3)">3</button><button class="rating-btn" id="rb_15_4" onclick="setRating(15,4)">4</button><button class="rating-btn" id="rb_15_5" onclick="setRating(15,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_15" type="text" placeholder="Observations…" oninput="observations[15]=this.value"></div><div class="diag-item"><div class="diag-item-label">Rayons avant (tension, cassés)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_16_1" onclick="setRating(16,1)">1</button><button class="rating-btn" id="rb_16_2" onclick="setRating(16,2)">2</button><button class="rating-btn" id="rb_16_3" onclick="setRating(16,3)">3</button><button class="rating-btn" id="rb_16_4" onclick="setRating(16,4)">4</button><button class="rating-btn" id="rb_16_5" onclick="setRating(16,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_16" type="text" placeholder="Observations…" oninput="observations[16]=this.value"></div><div class="diag-item"><div class="diag-item-label">Rayons arrière (tension, cassés)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_17_1" onclick="setRating(17,1)">1</button><button class="rating-btn" id="rb_17_2" onclick="setRating(17,2)">2</button><button class="rating-btn" id="rb_17_3" onclick="setRating(17,3)">3</button><button class="rating-btn" id="rb_17_4" onclick="setRating(17,4)">4</button><button class="rating-btn" id="rb_17_5" onclick="setRating(17,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_17" type="text" placeholder="Observations…" oninput="observations[17]=this.value"></div><div class="diag-item"><div class="diag-item-label">Roulements de roues (jeu, bruit)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_18_1" onclick="setRating(18,1)">1</button><button class="rating-btn" id="rb_18_2" onclick="setRating(18,2)">2</button><button class="rating-btn" id="rb_18_3" onclick="setRating(18,3)">3</button><button class="rating-btn" id="rb_18_4" onclick="setRating(18,4)">4</button><button class="rating-btn" id="rb_18_5" onclick="setRating(18,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_18" type="text" placeholder="Observations…" oninput="observations[18]=this.value"></div><div class="diag-section">⚙️ TRANSMISSION</div><div class="diag-item"><div class="diag-item-label">Chaîne (usure, allongement, rouille)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_19_1" onclick="setRating(19,1)">1</button><button class="rating-btn" id="rb_19_2" onclick="setRating(19,2)">2</button><button class="rating-btn" id="rb_19_3" onclick="setRating(19,3)">3</button><button class="rating-btn" id="rb_19_4" onclick="setRating(19,4)">4</button><button class="rating-btn" id="rb_19_5" onclick="setRating(19,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_19" type="text" placeholder="Observations…" oninput="observations[19]=this.value"></div><div class="diag-item"><div class="diag-item-label">Pédalier / manivelles (jeu, serrage)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_20_1" onclick="setRating(20,1)">1</button><button class="rating-btn" id="rb_20_2" onclick="setRating(20,2)">2</button><button class="rating-btn" id="rb_20_3" onclick="setRating(20,3)">3</button><button class="rating-btn" id="rb_20_4" onclick="setRating(20,4)">4</button><button class="rating-btn" id="rb_20_5" onclick="setRating(20,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_20" type="text" placeholder="Observations…" oninput="observations[20]=this.value"></div><div class="diag-item"><div class="diag-item-label">Pédales (rotation, filetage)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_21_1" onclick="setRating(21,1)">1</button><button class="rating-btn" id="rb_21_2" onclick="setRating(21,2)">2</button><button class="rating-btn" id="rb_21_3" onclick="setRating(21,3)">3</button><button class="rating-btn" id="rb_21_4" onclick="setRating(21,4)">4</button><button class="rating-btn" id="rb_21_5" onclick="setRating(21,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_21" type="text" placeholder="Observations…" oninput="observations[21]=this.value"></div><div class="diag-item"><div class="diag-item-label">Plateau(x) et cassette (usure dents)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_22_1" onclick="setRating(22,1)">1</button><button class="rating-btn" id="rb_22_2" onclick="setRating(22,2)">2</button><button class="rating-btn" id="rb_22_3" onclick="setRating(22,3)">3</button><button class="rating-btn" id="rb_22_4" onclick="setRating(22,4)">4</button><button class="rating-btn" id="rb_22_5" onclick="setRating(22,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_22" type="text" placeholder="Observations…" oninput="observations[22]=this.value"></div><div class="diag-item"><div class="diag-item-label">Dérailleur avant (alignement, câble)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_23_1" onclick="setRating(23,1)">1</button><button class="rating-btn" id="rb_23_2" onclick="setRating(23,2)">2</button><button class="rating-btn" id="rb_23_3" onclick="setRating(23,3)">3</button><button class="rating-btn" id="rb_23_4" onclick="setRating(23,4)">4</button><button class="rating-btn" id="rb_23_5" onclick="setRating(23,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_23" type="text" placeholder="Observations…" oninput="observations[23]=this.value"></div><div class="diag-item"><div class="diag-item-label">Dérailleur arrière (alignement, câble)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_24_1" onclick="setRating(24,1)">1</button><button class="rating-btn" id="rb_24_2" onclick="setRating(24,2)">2</button><button class="rating-btn" id="rb_24_3" onclick="setRating(24,3)">3</button><button class="rating-btn" id="rb_24_4" onclick="setRating(24,4)">4</button><button class="rating-btn" id="rb_24_5" onclick="setRating(24,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_24" type="text" placeholder="Observations…" oninput="observations[24]=this.value"></div><div class="diag-item"><div class="diag-item-label">Passage des vitesses (toutes vitesses)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_25_1" onclick="setRating(25,1)">1</button><button class="rating-btn" id="rb_25_2" onclick="setRating(25,2)">2</button><button class="rating-btn" id="rb_25_3" onclick="setRating(25,3)">3</button><button class="rating-btn" id="rb_25_4" onclick="setRating(25,4)">4</button><button class="rating-btn" id="rb_25_5" onclick="setRating(25,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_25" type="text" placeholder="Observations…" oninput="observations[25]=this.value"></div><div class="diag-section">🪑 POSITION &amp; ERGONOMIE</div><div class="diag-item"><div class="diag-item-label">Selle (état, fixation) — H. selle : ___ cm</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_26_1" onclick="setRating(26,1)">1</button><button class="rating-btn" id="rb_26_2" onclick="setRating(26,2)">2</button><button class="rating-btn" id="rb_26_3" onclick="setRating(26,3)">3</button><button class="rating-btn" id="rb_26_4" onclick="setRating(26,4)">4</button><button class="rating-btn" id="rb_26_5" onclick="setRating(26,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_26" type="text" placeholder="Observations…" oninput="observations[26]=this.value"></div><div class="diag-item"><div class="diag-item-label">Tige de selle (serrage, hauteur)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_27_1" onclick="setRating(27,1)">1</button><button class="rating-btn" id="rb_27_2" onclick="setRating(27,2)">2</button><button class="rating-btn" id="rb_27_3" onclick="setRating(27,3)">3</button><button class="rating-btn" id="rb_27_4" onclick="setRating(27,4)">4</button><button class="rating-btn" id="rb_27_5" onclick="setRating(27,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_27" type="text" placeholder="Observations…" oninput="observations[27]=this.value"></div><div class="diag-item"><div class="diag-item-label">Guidon / grips (état, serrage)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_28_1" onclick="setRating(28,1)">1</button><button class="rating-btn" id="rb_28_2" onclick="setRating(28,2)">2</button><button class="rating-btn" id="rb_28_3" onclick="setRating(28,3)">3</button><button class="rating-btn" id="rb_28_4" onclick="setRating(28,4)">4</button><button class="rating-btn" id="rb_28_5" onclick="setRating(28,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_28" type="text" placeholder="Observations…" oninput="observations[28]=this.value"></div><div class="diag-item"><div class="diag-item-label">H. guidon / potence : ___ cm</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_29_1" onclick="setRating(29,1)">1</button><button class="rating-btn" id="rb_29_2" onclick="setRating(29,2)">2</button><button class="rating-btn" id="rb_29_3" onclick="setRating(29,3)">3</button><button class="rating-btn" id="rb_29_4" onclick="setRating(29,4)">4</button><button class="rating-btn" id="rb_29_5" onclick="setRating(29,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_29" type="text" placeholder="Observations…" oninput="observations[29]=this.value"></div><div class="diag-section">💡 ÉCLAIRAGE &amp; SÉCURITÉ</div><div class="diag-item"><div class="diag-item-label">Phare avant (blanc, suffisant)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_30_1" onclick="setRating(30,1)">1</button><button class="rating-btn" id="rb_30_2" onclick="setRating(30,2)">2</button><button class="rating-btn" id="rb_30_3" onclick="setRating(30,3)">3</button><button class="rating-btn" id="rb_30_4" onclick="setRating(30,4)">4</button><button class="rating-btn" id="rb_30_5" onclick="setRating(30,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_30" type="text" placeholder="Observations…" oninput="observations[30]=this.value"></div><div class="diag-item"><div class="diag-item-label">Feu arrière (rouge, suffisant)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_31_1" onclick="setRating(31,1)">1</button><button class="rating-btn" id="rb_31_2" onclick="setRating(31,2)">2</button><button class="rating-btn" id="rb_31_3" onclick="setRating(31,3)">3</button><button class="rating-btn" id="rb_31_4" onclick="setRating(31,4)">4</button><button class="rating-btn" id="rb_31_5" onclick="setRating(31,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_31" type="text" placeholder="Observations…" oninput="observations[31]=this.value"></div><div class="diag-item"><div class="diag-item-label">Catadioptres (AV blanc / AR rouge / oranges)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_32_1" onclick="setRating(32,1)">1</button><button class="rating-btn" id="rb_32_2" onclick="setRating(32,2)">2</button><button class="rating-btn" id="rb_32_3" onclick="setRating(32,3)">3</button><button class="rating-btn" id="rb_32_4" onclick="setRating(32,4)">4</button><button class="rating-btn" id="rb_32_5" onclick="setRating(32,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_32" type="text" placeholder="Observations…" oninput="observations[32]=this.value"></div><div class="diag-item"><div class="diag-item-label">Sonnette (présence, fonctionnement)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_33_1" onclick="setRating(33,1)">1</button><button class="rating-btn" id="rb_33_2" onclick="setRating(33,2)">2</button><button class="rating-btn" id="rb_33_3" onclick="setRating(33,3)">3</button><button class="rating-btn" id="rb_33_4" onclick="setRating(33,4)">4</button><button class="rating-btn" id="rb_33_5" onclick="setRating(33,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_33" type="text" placeholder="Observations…" oninput="observations[33]=this.value"></div><div class="diag-item"><div class="diag-item-label">Réflecteurs pédales</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_34_1" onclick="setRating(34,1)">1</button><button class="rating-btn" id="rb_34_2" onclick="setRating(34,2)">2</button><button class="rating-btn" id="rb_34_3" onclick="setRating(34,3)">3</button><button class="rating-btn" id="rb_34_4" onclick="setRating(34,4)">4</button><button class="rating-btn" id="rb_34_5" onclick="setRating(34,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_34" type="text" placeholder="Observations…" oninput="observations[34]=this.value"></div><div class="diag-section">🧰 ACCESSOIRES</div><div class="diag-item"><div class="diag-item-label">Garde-boue AV &amp; AR (fixation, état)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_35_1" onclick="setRating(35,1)">1</button><button class="rating-btn" id="rb_35_2" onclick="setRating(35,2)">2</button><button class="rating-btn" id="rb_35_3" onclick="setRating(35,3)">3</button><button class="rating-btn" id="rb_35_4" onclick="setRating(35,4)">4</button><button class="rating-btn" id="rb_35_5" onclick="setRating(35,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_35" type="text" placeholder="Observations…" oninput="observations[35]=this.value"></div><div class="diag-item"><div class="diag-item-label">Béquille (fixation, fonctionnement)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_36_1" onclick="setRating(36,1)">1</button><button class="rating-btn" id="rb_36_2" onclick="setRating(36,2)">2</button><button class="rating-btn" id="rb_36_3" onclick="setRating(36,3)">3</button><button class="rating-btn" id="rb_36_4" onclick="setRating(36,4)">4</button><button class="rating-btn" id="rb_36_5" onclick="setRating(36,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_36" type="text" placeholder="Observations…" oninput="observations[36]=this.value"></div><div class="diag-item"><div class="diag-item-label">Porte-bagages (fixation, état)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_37_1" onclick="setRating(37,1)">1</button><button class="rating-btn" id="rb_37_2" onclick="setRating(37,2)">2</button><button class="rating-btn" id="rb_37_3" onclick="setRating(37,3)">3</button><button class="rating-btn" id="rb_37_4" onclick="setRating(37,4)">4</button><button class="rating-btn" id="rb_37_5" onclick="setRating(37,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_37" type="text" placeholder="Observations…" oninput="observations[37]=this.value"></div><div class="diag-section">⚡ VAE — ASSISTANCE ÉLECTRIQUE</div><div class="diag-item"><div class="diag-item-label">Batterie (état, fixation, charge ___% )</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_38_1" onclick="setRating(38,1)">1</button><button class="rating-btn" id="rb_38_2" onclick="setRating(38,2)">2</button><button class="rating-btn" id="rb_38_3" onclick="setRating(38,3)">3</button><button class="rating-btn" id="rb_38_4" onclick="setRating(38,4)">4</button><button class="rating-btn" id="rb_38_5" onclick="setRating(38,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_38" type="text" placeholder="Observations…" oninput="observations[38]=this.value"></div><div class="diag-item"><div class="diag-item-label">Chargeur (présence, état câble)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_39_1" onclick="setRating(39,1)">1</button><button class="rating-btn" id="rb_39_2" onclick="setRating(39,2)">2</button><button class="rating-btn" id="rb_39_3" onclick="setRating(39,3)">3</button><button class="rating-btn" id="rb_39_4" onclick="setRating(39,4)">4</button><button class="rating-btn" id="rb_39_5" onclick="setRating(39,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_39" type="text" placeholder="Observations…" oninput="observations[39]=this.value"></div><div class="diag-item"><div class="diag-item-label">Moteur (bruit, fixation, échauffement)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_40_1" onclick="setRating(40,1)">1</button><button class="rating-btn" id="rb_40_2" onclick="setRating(40,2)">2</button><button class="rating-btn" id="rb_40_3" onclick="setRating(40,3)">3</button><button class="rating-btn" id="rb_40_4" onclick="setRating(40,4)">4</button><button class="rating-btn" id="rb_40_5" onclick="setRating(40,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_40" type="text" placeholder="Observations…" oninput="observations[40]=this.value"></div><div class="diag-item"><div class="diag-item-label">Console / écran (fonctionnement, erreurs)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_41_1" onclick="setRating(41,1)">1</button><button class="rating-btn" id="rb_41_2" onclick="setRating(41,2)">2</button><button class="rating-btn" id="rb_41_3" onclick="setRating(41,3)">3</button><button class="rating-btn" id="rb_41_4" onclick="setRating(41,4)">4</button><button class="rating-btn" id="rb_41_5" onclick="setRating(41,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_41" type="text" placeholder="Observations…" oninput="observations[41]=this.value"></div><div class="diag-item"><div class="diag-item-label">Câblage électrique (connecteurs)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_42_1" onclick="setRating(42,1)">1</button><button class="rating-btn" id="rb_42_2" onclick="setRating(42,2)">2</button><button class="rating-btn" id="rb_42_3" onclick="setRating(42,3)">3</button><button class="rating-btn" id="rb_42_4" onclick="setRating(42,4)">4</button><button class="rating-btn" id="rb_42_5" onclick="setRating(42,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_42" type="text" placeholder="Observations…" oninput="observations[42]=this.value"></div><div class="diag-item"><div class="diag-item-label">Modes d'assistance (chaque niveau)</div>
+        <div class="rating-row">
+          <button class="rating-btn" id="rb_43_1" onclick="setRating(43,1)">1</button><button class="rating-btn" id="rb_43_2" onclick="setRating(43,2)">2</button><button class="rating-btn" id="rb_43_3" onclick="setRating(43,3)">3</button><button class="rating-btn" id="rb_43_4" onclick="setRating(43,4)">4</button><button class="rating-btn" id="rb_43_5" onclick="setRating(43,5)">5</button>
+        </div>
+        <input class="obs-field" id="obs_43" type="text" placeholder="Observations…" oninput="observations[43]=this.value"></div></div>
+  </div>
+
+  <!-- TAB 4 : SYNTHÈSE -->
+  <div class="page" id="tab4">
+
+    <div class="score-card" id="score-card">
+      <div class="score-num" id="score-num">—</div>
+      <div class="score-sub">Score global / 5</div>
+      <div class="score-bar" id="score-bar"></div>
+      <div class="score-label-row"><span>Dangereux</span><span>Excellent</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="icon">📋</span>Préconisations</div>
+      <div class="card-body">
+        <div class="synth-urgents">
+          <div class="synth-label">⚠ Travaux urgents (sécurité)</div>
+          <textarea class="obs-field" id="t_urgents" placeholder="Ex : câble frein AV à remplacer…" style="width:100%;min-height:60px"></textarea>
+        </div>
+        <div class="synth-reco">
+          <div class="synth-label">✓ Travaux recommandés</div>
+          <textarea class="obs-field" id="t_reco" placeholder="Ex : lubrification chaîne, réglage dérailleur…" style="width:100%;min-height:60px"></textarea>
+        </div>
+        <div class="synth-watch">
+          <div class="synth-label">◉ À surveiller</div>
+          <textarea class="obs-field" id="t_surveiller" placeholder="Ex : pneu AR à mi-usure…" style="width:100%;min-height:60px"></textarea>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Estimation coût (€)</label><input type="number" id="cout" placeholder="0" min="0"></div>
+          <div class="field"><label>Devis</label>
+            <select id="devis"><option>À établir</option><option>Joint</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="danger-card">
+      <label class="danger-toggle">
+        <input type="checkbox" id="danger_check">
+        <span class="danger-label">⚠ VÉLO DANGEREUX — NE PAS REMETTRE EN CIRCULATION</span>
+      </label>
+      <div style="margin-top:10px">
+        <div class="field"><label style="color:var(--orange)">Motif</label>
+          <textarea class="obs-field" id="danger_motif" placeholder="Décrire le danger…" style="width:100%;border-color:var(--orange)"></textarea>
+        </div>
+        <div style="font-size:12px;color:var(--orange);margin-top:6px">Signature technicien : ________________________ &nbsp; Date : __________</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="icon">✍️</span>Signatures</div>
+      <div class="card-body">
+        <div class="row2">
+          <div style="border:1.5px solid var(--border);border-radius:8px;padding:10px;min-height:80px">
+            <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:4px">Client</div>
+            <div style="font-size:11px;color:var(--muted)">Je reconnais avoir pris connaissance du diagnostic et autorise les travaux.</div>
+          </div>
+          <div style="border:1.5px solid var(--border);border-radius:8px;padding:10px;min-height:80px">
+            <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:4px">Technicien</div>
+            <div style="font-size:11px;color:var(--muted)">Je certifie avoir réalisé ce diagnostic objectivement.</div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px">Ce document vaut bon de dépôt. Tout devis sera validé avant intervention.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-fiche -->
+
+<!-- PAGE LISTE DES FICHES -->
+<div id="page-list" style="display:none;padding-top:calc(env(safe-area-inset-top,0px) + 60px)">
+  <div style="padding:12px">
+    <div style="font-size:18px;font-weight:700;margin-bottom:12px;color:var(--blue)">📋 Fiches sauvegardées</div>
+    <div id="fiches-list"></div>
+  </div>
+</div>
+
+</div><!-- content-inner -->
+</div><!-- content -->
+
+<!-- BOTTOM ACTIONS -->
+<div class="bottom-actions" id="bottom-actions">
+  <button class="action-btn btn-new" onclick="newFiche()">+ Nouvelle</button>
+  <button class="action-btn btn-save" onclick="saveFiche()">💾 Sauvegarder</button>
+  <button class="action-btn btn-pdf" onclick="window.print()">🖨 PDF</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── SECTIONS DIAGNOSTIC ──
+const sections = [
+  {title:"🏗 CADRE & DIRECTION",items:[
+    "Cadre (rouille, fissures, chocs)",
+    "Fourche avant (jeu, alignement)",
+    "Direction / pivot (roulements)",
+    "Potence (serrage, alignement guidon)"
+  ]},
+  {title:"🛑 FREINAGE",items:[
+    "Levier frein avant (course, souplesse)",
+    "Levier frein arrière (course, souplesse)",
+    "Patins / plaquettes avant (usure)",
+    "Patins / plaquettes arrière (usure)",
+    "Câbles et gaines (état, corrosion)",
+    "Disques (voilage, épaisseur) — si disque",
+    "Efficacité freinage AV — test à vide",
+    "Efficacité freinage AR — test à vide"
+  ]},
+  {title:"🔵 ROUES & PNEUMATIQUES",items:[
+    "Pneu avant — Pression : ___ bar",
+    "Pneu arrière — Pression : ___ bar",
+    "Jante avant (voilage latéral / radial)",
+    "Jante arrière (voilage latéral / radial)",
+    "Rayons avant (tension, cassés)",
+    "Rayons arrière (tension, cassés)",
+    "Roulements de roues (jeu, bruit)"
+  ]},
+  {title:"⚙️ TRANSMISSION",items:[
+    "Chaîne (usure, allongement, rouille)",
+    "Pédalier / manivelles (jeu, serrage)",
+    "Pédales (rotation, filetage)",
+    "Plateau(x) et cassette (usure dents)",
+    "Dérailleur avant (alignement, câble)",
+    "Dérailleur arrière (alignement, câble)",
+    "Passage des vitesses (toutes vitesses)"
+  ]},
+  {title:"🪑 POSITION & ERGONOMIE",items:[
+    "Selle (état, fixation) — H. selle : ___ cm",
+    "Tige de selle (serrage, hauteur)",
+    "Guidon / grips (état, serrage)",
+    "H. guidon / potence : ___ cm"
+  ]},
+  {title:"💡 ÉCLAIRAGE & SÉCURITÉ",items:[
+    "Phare avant (blanc, suffisant)",
+    "Feu arrière (rouge, suffisant)",
+    "Catadioptres (AV blanc / AR rouge / oranges)",
+    "Sonnette (présence, fonctionnement)",
+    "Réflecteurs pédales"
+  ]},
+  {title:"🧰 ACCESSOIRES",items:[
+    "Garde-boue AV & AR (fixation, état)",
+    "Béquille (fixation, fonctionnement)",
+    "Porte-bagages (fixation, état)"
+  ]},
+  {title:"⚡ VAE — ASSISTANCE ÉLECTRIQUE",items:[
+    "Batterie (état, fixation, charge ___% )",
+    "Chargeur (présence, état câble)",
+    "Moteur (bruit, fixation, échauffement)",
+    "Console / écran (fonctionnement, erreurs)",
+    "Câblage électrique (connecteurs)",
+    "Modes d'assistance (chaque niveau)"
+  ]}
+];
+
+// ── STATE ──
+let ratings = {}, observations = {}, photos = [];
+let currentFicheId = null;
+
+// ── INIT DIAGNOSTIC ──
+function buildDiag(){
+  const container = document.getElementById('diag-container');
+  container.innerHTML = '';
+  let idx = 0;
+  sections.forEach(sec => {
+    const sdiv = document.createElement('div');
+    sdiv.className = 'diag-section';
+    sdiv.textContent = sec.title;
+    container.appendChild(sdiv);
+    sec.items.forEach(item => {
+      const i = idx++;
+      const div = document.createElement('div');
+      div.className = 'diag-item';
+      div.innerHTML = `<div class="diag-item-label">${item}</div>
+        <div class="rating-row">
+          ${[1,2,3,4,5].map(v=>`<button class="rating-btn" id="rb_${i}_${v}" onclick="setRating(${i},${v})">${v}</button>`).join('')}
+        </div>
+        <input class="obs-field" id="obs_${i}" type="text" placeholder="Observations…" oninput="observations[${i}]=this.value">`;
+      container.appendChild(div);
+      if(ratings[i]) setRating(i, ratings[i], true);
+      if(observations[i]) document.getElementById('obs_'+i).value = observations[i];
+    });
+  });
+}
+
+function setRating(idx, val, silent){
+  for(let v=1;v<=5;v++){
+    const btn = document.getElementById('rb_'+idx+'_'+v);
+    if(btn){btn.className='rating-btn'+(v===val?' sel-'+val:'');}
+  }
+  ratings[idx] = val;
+  if(!silent) updateScore();
+}
+
+function updateScore(){
+  const vals = Object.values(ratings);
+  if(!vals.length){
+    document.getElementById('score-num').textContent='—';
+    document.getElementById('score-bar').innerHTML='';
+    return;
+  }
+  const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
+  const disp = avg.toFixed(1);
+  document.getElementById('score-num').textContent = disp;
+  const col = avg>=4?'#1D9E75':avg>=3?'#2E75B6':avg>=2?'#EF9F27':'#E24B4A';
+  document.getElementById('score-card').style.background = col;
+  let bar='';
+  for(let i=1;i<=5;i++) bar+=`<div class="score-pip ${i<=Math.round(avg)?'on':''}"></div>`;
+  document.getElementById('score-bar').innerHTML = bar;
+}
+
+// ── TABS ──
+let currentTab = 0;
+function showTab(n){
+  document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  currentTab = n;
+  if(n===3) buildDiag();
+  if(n===4) updateScore();
+}
+
+// ── PAGES ──
+function showPage(p){
+  document.getElementById('page-fiche').style.display = p==='fiche'?'':'none';
+  document.getElementById('page-list').style.display = p==='list'?'':'none';
+  document.getElementById('tabs').style.display = p==='fiche'?'':'none';
+  document.getElementById('bottom-actions').style.display = p==='fiche'?'':'none';
+  document.getElementById('content-inner').style.paddingTop = p==='fiche'?'calc(env(safe-area-inset-top,0px) + 108px)':'0';
+  if(p==='list') renderList();
+}
+
+// ── PHOTOS ──
+function renderPhotos(){
+  const grid = document.getElementById('photo-grid');
+  grid.innerHTML = '';
+  photos.forEach((src,i)=>{
+    const div = document.createElement('div');
+    div.className='photo-thumb';
+    div.innerHTML=`<img src="${src}"><button class="del-btn" onclick="deletePhoto(${i})">✕</button>`;
+    grid.appendChild(div);
+  });
+  if(photos.length<9){
+    const add = document.createElement('div');
+    add.className='photo-thumb photo-add';
+    add.innerHTML='<span class="cam-icon">📷</span><span>Ajouter</span>';
+    add.onclick=()=>document.getElementById('photo-input').click();
+    grid.appendChild(add);
+  }
+}
+
+document.getElementById('photo-input').addEventListener('change',function(e){
+  const files = Array.from(e.target.files);
+  files.forEach(file=>{
+    if(photos.length>=9) return;
+    const reader = new FileReader();
+    reader.onload = ev=>{photos.push(ev.target.result);renderPhotos();};
+    reader.readAsDataURL(file);
+  });
+  this.value='';
+});
+
+function deletePhoto(i){
+  photos.splice(i,1);
+  renderPhotos();
+}
+
+// ── SAVE / LOAD ──
+function collectData(){
+  return {
+    id: currentFicheId || Date.now(),
+    date: document.getElementById('d_recep').value || new Date().toISOString().split('T')[0],
+    nom: document.getElementById('nom').value,
+    tel: document.getElementById('tel').value,
+    email: document.getElementById('email').value,
+    nclient: document.getElementById('nclient').value,
+    nbon: document.getElementById('nbon').value,
+    d_recep: document.getElementById('d_recep').value,
+    d_rest: document.getElementById('d_rest').value,
+    technicien: document.getElementById('technicien').value,
+    photos_ok: document.getElementById('photos_ok').value,
+    demande: document.getElementById('demande').value,
+    marque: document.getElementById('marque').value,
+    modele: document.getElementById('modele').value,
+    couleur: document.getElementById('couleur').value,
+    type_velo: document.getElementById('type_velo').value,
+    vae: document.getElementById('vae').value,
+    ncadre: document.getElementById('ncadre').value,
+    bicycode: document.getElementById('bicycode').value,
+    historique: document.getElementById('historique').value,
+    t_urgents: document.getElementById('t_urgents').value,
+    t_reco: document.getElementById('t_reco').value,
+    t_surveiller: document.getElementById('t_surveiller').value,
+    cout: document.getElementById('cout').value,
+    devis: document.getElementById('devis').value,
+    danger_check: document.getElementById('danger_check').checked,
+    danger_motif: document.getElementById('danger_motif').value,
+    ratings: JSON.parse(JSON.stringify(ratings)),
+    observations: JSON.parse(JSON.stringify(observations)),
+    photos: photos,
+  };
+}
+
+function restoreData(d){
+  currentFicheId = d.id;
+  const fields = ['nom','tel','email','nclient','nbon','d_recep','d_rest','technicien','photos_ok','demande','marque','modele','couleur','type_velo','vae','ncadre','bicycode','historique','t_urgents','t_reco','t_surveiller','cout','devis','danger_motif'];
+  fields.forEach(k=>{const el=document.getElementById(k);if(el&&d[k]!==undefined)el.value=d[k];});
+  document.getElementById('danger_check').checked = !!d.danger_check;
+  ratings = d.ratings||{};
+  observations = d.observations||{};
+  photos = d.photos||[];
+  renderPhotos();
+  buildDiag();
+  updateScore();
+  updateNavSub();
+}
+
+function saveFiche(){
+  const data = collectData();
+  let fiches = JSON.parse(localStorage.getItem('velo_fiches')||'[]');
+  const idx = fiches.findIndex(f=>f.id===data.id);
+  if(idx>=0) fiches[idx]=data; else fiches.unshift(data);
+  localStorage.setItem('velo_fiches', JSON.stringify(fiches));
+  currentFicheId = data.id;
+  toast('✅ Fiche sauvegardée !');
+}
+
+function renderList(){
+  const list = document.getElementById('fiches-list');
+  const fiches = JSON.parse(localStorage.getItem('velo_fiches')||'[]');
+  if(!fiches.length){
+    list.innerHTML='<div class="empty-state"><div class="big">📭</div><p>Aucune fiche sauvegardée.<br>Créez et sauvegardez votre première fiche.</p></div>';
+    return;
+  }
+  list.innerHTML = fiches.map((f,i)=>{
+    const vals = Object.values(f.ratings||{});
+    const avg = vals.length ? (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1) : '—';
+    const col = avg==='—'?'#888':avg>=4?'#1D9E75':avg>=3?'#2E75B6':avg>=2?'#EF9F27':'#E24B4A';
+    const date = f.d_recep ? new Date(f.d_recep).toLocaleDateString('fr-FR') : '—';
+    return `<div class="fiche-item">
+      <div class="fiche-avatar">🚲</div>
+      <div class="fiche-info">
+        <div class="fiche-nom">${f.nom||'Sans nom'} ${f.marque?'— '+f.marque:''}</div>
+        <div class="fiche-meta">${date} · ${f.nbon?'N°'+f.nbon:''} · ${f.technicien||''}</div>
+      </div>
+      <div class="fiche-score" style="color:${col}">${avg}</div>
+      <div class="fiche-actions">
+        <button class="btn-small btn-load" onclick="loadFiche(${f.id})">Ouvrir</button>
+        <button class="btn-small btn-del" onclick="deleteFiche(${f.id},event)">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function loadFiche(id){
+  const fiches = JSON.parse(localStorage.getItem('velo_fiches')||'[]');
+  const f = fiches.find(x=>x.id===id);
+  if(!f) return;
+  restoreData(f);
+  showPage('fiche');
+  showTab(0);
+  toast('📂 Fiche chargée');
+}
+
+function deleteFiche(id, e){
+  e.stopPropagation();
+  if(!confirm('Supprimer cette fiche ?')) return;
+  let fiches = JSON.parse(localStorage.getItem('velo_fiches')||'[]');
+  fiches = fiches.filter(f=>f.id!==id);
+  localStorage.setItem('velo_fiches', JSON.stringify(fiches));
+  renderList();
+  toast('🗑 Fiche supprimée');
+}
+
+function newFiche(){
+  if(!confirm('Créer une nouvelle fiche ? Les données non sauvegardées seront perdues.')) return;
+  currentFicheId = null;
+  ratings={}; observations={}; photos=[];
+  document.querySelectorAll('input:not([type=radio]):not([type=checkbox]),select,textarea').forEach(el=>el.value='');
+  document.querySelectorAll('input[type=checkbox]').forEach(el=>el.checked=false);
+  const num = Math.floor(Math.random()*9000)+1000;
+  document.getElementById('nbon').value = num;
+  document.getElementById('d_recep').value = new Date().toISOString().split('T')[0];
+  renderPhotos();
+  buildDiag();
+  updateScore();
+  updateNavSub();
+  showTab(0);
+  toast('📄 Nouvelle fiche créée');
+}
+
+function updateNavSub(){
+  const nom = document.getElementById('nom').value;
+  const marque = document.getElementById('marque').value;
+  document.getElementById('nav-sub').textContent = (nom||marque)? (nom||'')+(nom&&marque?' — ':''+(marque||'')) : 'Nouvelle fiche';
+}
+document.getElementById('nom').addEventListener('input', updateNavSub);
+document.getElementById('marque').addEventListener('input', updateNavSub);
+
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2000);
+}
+
+// ── INIT ──
+const num = Math.floor(Math.random()*9000)+1000;
+document.getElementById('nbon').value = num;
+document.getElementById('d_recep').value = new Date().toISOString().split('T')[0];
+buildDiag();
+renderPhotos();
+showPage('fiche');
+</script>
+
+
+</body></html>
